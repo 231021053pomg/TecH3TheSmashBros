@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TecH3TheSmashBros.API\TecH3TheSmashBros.API.csproj" />
+  </ItemGroup>
+
 </Project>

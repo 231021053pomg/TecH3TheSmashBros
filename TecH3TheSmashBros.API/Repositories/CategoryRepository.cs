@@ -1,19 +1,50 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TecH3TheSmashBros.API.Database;
 using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public Task<List<Category>> GetAllCategories()
+        private readonly TecH3TheSmashBrosDbContext _sut;
+        public CategoryRepository(TecH3TheSmashBrosDbContext sut)
         {
-            throw new NotImplementedException(); 
+            _sut = sut;
+
         }
 
-        public Task<Category> GetCategory()
+
+        public async Task<List<Category>> GetAllCategories()
+        {
+            return await _sut.Category
+                .Where(a => a.DeletedAt == null)
+                .ToListAsync();
+        }
+
+
+        public async Task<Category> UpdateCategory(int id, Category category)
+        {
+            var editcategory = await _sut.Category.FirstOrDefaultAsync(a => a.Id == id);
+            if (editcategory != null)
+            {
+                editcategory.UpdatedAt = DateTime.Now;
+                editcategory.Title = category.Title;
+                _sut.Category.Update(editcategory);
+                await _sut.SaveChangesAsync();
+            }
+            return editcategory;
+        }
+
+        public Task<Category> CreateCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Category> DeleteCatagory(int id)
         {
             throw new NotImplementedException();
         }
