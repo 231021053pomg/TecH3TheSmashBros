@@ -8,15 +8,15 @@ namespace TecH3TheSmashBros.API.Repositories
 {
     interface IUserRepositories
     {
-        Task<List<Users>> GetAllUsers();
+        Task<List<User>> GetAllUsers();
 
-        Task<Users> GetUserById(int id);
+        Task<User> GetUserById(int id);
 
-        Task<Users> CreateUser(Users users);
+        Task<User> CreateUser(User users);
 
-        Task<Users> UpdateUser(int id, Users users);
+        Task<User> UpdateUser(int id, User users);
 
-        Task<Users> DeleteUser(int id);
+        Task<User> DeleteUser(int id);
 
     }
 }

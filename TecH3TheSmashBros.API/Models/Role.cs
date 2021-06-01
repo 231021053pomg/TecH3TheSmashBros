@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TecH3TheSmashBros.API.Models
 {
-    public class Roles : BaseModel
+    public class Role : BaseModel
     {
         
         [Required]
