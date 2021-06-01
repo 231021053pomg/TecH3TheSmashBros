@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TecH3TheSmashBros.API.Models
 {
     public class Users : BaseModel
     {
-        [Key]
-        public int UserId { get; set; }
 
         [Required]
-        [StringLength(64, ErrorMessage = "Maximum 32 Chars")]
+        [StringLength(64, ErrorMessage = "Maximum 64 Chars")]
 
         public string Email { get; set; }
         [Required]
@@ -20,7 +15,7 @@ namespace TecH3TheSmashBros.API.Models
 
         public string Password { get; set; }
 
-        //[ForeignKey("")]
+        [ForeignKey("Roles.Id")]
         public string UserType { get; set; }
     }
 }

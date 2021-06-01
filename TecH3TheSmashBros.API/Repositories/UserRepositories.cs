@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
-    public class UserRepositories:IUserRepositories
+    public class UserRepositories
     {
         
     }
