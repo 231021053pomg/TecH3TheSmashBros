@@ -16,6 +16,6 @@ namespace TecH3TheSmashBros.API.Models
         public string Password { get; set; }
 
         [ForeignKey("Role.Id")]
-        public string UserType { get; set; }
+        public int RoleId { get; set; }
     }
 }
