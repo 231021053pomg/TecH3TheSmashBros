@@ -1,11 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TecH3TheSmashBros.API.Models
 {
-    public class Users
+    public class Users : BaseModel
     {
+
+        [Required]
+        [StringLength(64, ErrorMessage = "Maximum 64 Chars")]
+
+        public string Email { get; set; }
+        [Required]
+        [StringLength(32, ErrorMessage = "Maximum 32 Chars")]
+
+        public string Password { get; set; }
+
+        [ForeignKey("Roles.Id")]
+        public string UserType { get; set; }
     }
 }
