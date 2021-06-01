@@ -10,7 +10,7 @@ namespace TecH3TheSmashBros.API.Repositories
     {
         public Task<List<Category>> GetAllCategories()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); 
         }
 
         public Task<Category> GetCategory()
