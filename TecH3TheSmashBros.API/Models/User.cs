@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TecH3TheSmashBros.API.Models
 {
-    public class Users : BaseModel
+    public class User : BaseModel
     {
 
         [Required]
@@ -15,7 +15,7 @@ namespace TecH3TheSmashBros.API.Models
 
         public string Password { get; set; }
 
-        [ForeignKey("Roles.Id")]
+        [ForeignKey("Role.Id")]
         public string UserType { get; set; }
     }
 }
