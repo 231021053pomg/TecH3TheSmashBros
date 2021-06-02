@@ -21,6 +21,7 @@ namespace TecH3TheSmashBros.API.Database
         public DbSet<Product> Product { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
+        // dette er en kommentar
 
     }
 }
