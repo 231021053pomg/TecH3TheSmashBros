@@ -53,7 +53,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
         }
         [Fact]
-        public async Task GetAllCustomer()
+        public async Task GetAllCustomers()
         {
             // Arange
             CustomerRepository customerRepository= new CustomerRepository(_context);
@@ -76,16 +76,6 @@ namespace TecH3TheSmashBros.Tests.Repositories
             // Assert
             Assert.NotNull(customer);
             Assert.Equal(customerId, customer.Id);
-            //irstName = "Berk",
-            //    LastName = "Catal",
-            //    Street = "Brøndbyvestervej 18",
-            //    Zipcode = 2600,
-            //    City = "Glostrup"
-            Assert.Equal("Berk", customer.FirstName);
-            Assert.Equal("Catal", customer.LastName);
-            Assert.Equal("Brøndbyvestervej 18", customer.Street);
-            Assert.Equal(2600, customer.Zipcode);
-            Assert.Equal("Glostrup", customer.City);
             Assert.NotNull(customer.DeletedAt);
         }
         [Fact]
