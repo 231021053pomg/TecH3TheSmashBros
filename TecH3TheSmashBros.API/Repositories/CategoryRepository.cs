@@ -39,14 +39,24 @@ namespace TecH3TheSmashBros.API.Repositories
             return editcategory;
         }
 
-        public Task<Category> CreateCategory(Category category)
+        public async Task<Category> CreateCategory(Category category)
         {
-            throw new NotImplementedException();
+            category.CreateAt = DateTime.Now;
+            _sut.Category.Add(category);
+            await _sut.SaveChangesAsync();
+            return category;
         }
 
-        public Task<Category> DeleteCatagory(int id)
+        public async Task<Category> DeleteCatagory(int id)
         {
-            throw new NotImplementedException();
+            var category = await _sut.Category.FirstOrDefaultAsync(a => a.Id == id);
+            if (category != null)
+            {
+                category.DeletedAt = DateTime.Now;
+                await _sut.SaveChangesAsync();
+            }
+            return category;
         }
+
     }
 }

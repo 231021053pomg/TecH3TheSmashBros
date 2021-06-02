@@ -40,7 +40,7 @@ namespace TecH3TheSmashBros.Tests
 
         }
         [Fact]
-        public async Task GetAllCategoriesById()
+        public async Task GetAllCategories()
         {
             // Arange
             CategoryRepository categoryRepository = new CategoryRepository(_context);
@@ -52,5 +52,6 @@ namespace TecH3TheSmashBros.Tests
             Assert.NotNull(category);
             Assert.Equal(3, category.Count);
         }
+
     }
 }
