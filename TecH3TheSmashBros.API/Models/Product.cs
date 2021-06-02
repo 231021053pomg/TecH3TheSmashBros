@@ -17,7 +17,7 @@ namespace TecH3TheSmashBros.API.Models
         public int Storage { get; set; }
 
         [ForeignKey("Category.Id")]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public int Price { get; set; }

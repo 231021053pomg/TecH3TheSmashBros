@@ -8,17 +8,17 @@ namespace TecH3TheSmashBros.API.Repositories
 {
     interface IProductRepository
     {
-        Task<List<User>> GetAllProducts();
+        Task<List<Product>> GetAllProducts();
 
-        Task<List<User>> GetProductsByCategory(Category category);
+        Task<List<Product>> GetProductsByCategory(int categoryId);
 
-        Task<User> GetProductById(int id);
+        Task<Product> GetProductById(int id);
 
-        Task<User> CreateProduct(Product product);
+        Task<Product> CreateProduct(Product product);
 
-        Task<User> UpdateProduct(int id, Product product);
+        Task<Product> UpdateProduct(int id, Product product);
 
-        Task<User> DeleteProduct(int id);
+        Task<Product> DeleteProduct(int id);
 
     }
 }

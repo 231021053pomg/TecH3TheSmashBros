@@ -11,7 +11,7 @@ namespace TecH3TheSmashBros.API.Models
         public int Id { get; set; }
 
         [JsonIgnore]
-        public DateTime CreateAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [JsonIgnore]
         public DateTime? UpdatedAt { get; set; }
