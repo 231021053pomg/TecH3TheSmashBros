@@ -45,7 +45,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
             }
             [Fact]
-            public async Task GetAllCategories()
+            public async Task GetAllUsers()
             {
                 // Arange
                 UserRepository userRepository = new UserRepository(_context);
@@ -80,7 +80,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 User userupdate = new User
                 {
                     Email = "hejmeddig@1234.dk",
-                    Password = "1234"
+                    Password = "123"
                 };
                 // Act
                 var user = await userRepository.UpdateUser(1, userupdate);
@@ -88,7 +88,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 Assert.NotNull(user);
                 Assert.Equal(userId, user.Id);
                 Assert.Equal("hejmeddig@1234.dk", user.Email);
-                Assert.Equal("1234", user.Password);
+                Assert.Equal("123", user.Password);
                 Assert.NotNull(user.UpdatedAt);
 
             }

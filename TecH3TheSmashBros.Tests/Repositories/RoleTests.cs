@@ -42,7 +42,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
             }
             [Fact]
-            public async Task GetAllCategories()
+            public async Task GetAllRoles()
             {
                 // Arange
                 RoleRepository roleRepository = new RoleRepository(_context);
@@ -76,14 +76,14 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 int roleId = 1;
                 Role roleupdate = new Role
                 {
-                    RoleName = "User"
+                    RoleName = "UserOne"
                 };
                 // Act
                 var role = await roleRepository.UpdateRole(1, roleupdate);
                 // Assert
                 Assert.NotNull(role);
                 Assert.Equal(roleId, role.Id);
-                Assert.Equal("User", role.RoleName);
+                Assert.Equal("UserOne", role.RoleName);
                 Assert.NotNull(role.UpdatedAt);
 
             }
