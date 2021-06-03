@@ -102,7 +102,7 @@ namespace TecH3TheSmashBros.Tests
 
             // assert
             Assert.NotNull(category);
-            Assert.NotEqual(DateTime.MinValue, category.CreateAt);
+            Assert.NotEqual(DateTime.MinValue, category.CreatedAt);
             Assert.Equal(categories.Count + 1, category.Id);
         }
 
