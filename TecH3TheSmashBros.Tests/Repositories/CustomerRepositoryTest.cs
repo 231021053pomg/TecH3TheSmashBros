@@ -119,7 +119,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
             // assert
             Assert.NotNull(customer);
-            Assert.NotEqual(DateTime.MinValue, customer.CreateAt);
+            Assert.NotEqual(DateTime.MinValue, customer.CreatedAt);
             Assert.Equal(customers.Count + 1, customer.Id);
         }
 

@@ -18,7 +18,7 @@ namespace TecH3TheSmashBros.API.Repositories
         }
         public async Task<Customer> CreateCustomer(Customer customer)
         {
-            customer.CreateAt = DateTime.Now;
+            customer.CreatedAt = DateTime.Now;
             _sut.Customer.Add(customer);
             await _sut.SaveChangesAsync();
             return customer;
