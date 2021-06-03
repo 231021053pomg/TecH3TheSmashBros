@@ -8,11 +8,10 @@ namespace TecH3TheSmashBros.API.Models
 
         [Required]
         [StringLength(64, ErrorMessage = "Maximum 64 Chars")]
-
         public string Email { get; set; }
+
         [Required]
         [StringLength(32, ErrorMessage = "Maximum 32 Chars")]
-
         public string Password { get; set; }
 
         [ForeignKey("Role.Id")]

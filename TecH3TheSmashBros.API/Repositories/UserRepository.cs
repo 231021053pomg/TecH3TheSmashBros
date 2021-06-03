@@ -36,7 +36,7 @@ namespace TecH3TheSmashBros.API.Repositories
         }
         public async Task<User> CreateUser(User user)
         {
-            user.CreateAt = DateTime.Now;
+            user.CreatedAt = DateTime.Now;
             _sut.User.Add(user);
             await _sut.SaveChangesAsync();
             return user;
