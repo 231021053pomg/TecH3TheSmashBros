@@ -13,12 +13,12 @@ namespace TecH3TheSmashBros.API.Models
         [ForeignKey("Prodcuts.Id")]
         public string ProductsId { get; set; }
 
-        public string Price { get; set; }
+        public int Price { get; set; }
 
         [Required]
-        public string Amount { get; set; }
+        public int Amount { get; set; }
 
-        [ForeignKey("OrderNumber.Id")]
-        public int OrderNumberId { get; set; }
+        [ForeignKey("Order.Id")]
+        public int OrderId { get; set; }
     }
 }
