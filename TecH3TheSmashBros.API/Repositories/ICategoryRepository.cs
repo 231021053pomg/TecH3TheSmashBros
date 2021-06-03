@@ -12,6 +12,6 @@ namespace TecH3TheSmashBros.API.Repositories
         Task<List<Category>> GetAllCategories();
         Task<Category> UpdateCategory(int id, Category category);
         Task<Category> DeleteCatagory(int id);
-        
+
     }
 }

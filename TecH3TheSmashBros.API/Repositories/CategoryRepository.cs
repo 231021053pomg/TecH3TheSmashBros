@@ -16,8 +16,6 @@ namespace TecH3TheSmashBros.API.Repositories
             _sut = sut;
 
         }
-
-
         public async Task<List<Category>> GetAllCategories()
         {
             return await _sut.Category
