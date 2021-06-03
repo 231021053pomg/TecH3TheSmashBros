@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TecH3TheSmashBros.API.Database;
 
 namespace TecH3TheSmashBros.API.Migrations
 {
     [DbContext(typeof(TecH3TheSmashBrosDbContext))]
-    partial class TecH3TheSmashBrosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210602103949_changed_product_category_to_id")]
+    partial class changed_product_category_to_id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -56,7 +58,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -83,9 +85,9 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Zipcode")
+                    b.Property<double>("Zipcode")
                         .HasMaxLength(16)
-                        .HasColumnType("int");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -99,7 +101,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -127,11 +129,8 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
-
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime");
@@ -158,7 +157,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -191,7 +190,7 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -223,7 +222,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -248,7 +247,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -264,11 +263,11 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("UserType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

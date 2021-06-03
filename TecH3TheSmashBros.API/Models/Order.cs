@@ -8,5 +8,7 @@ namespace TecH3TheSmashBros.API.Models
 
         [ForeignKey("Customer.Id")]
         public int UserId { get; set; }
+        [Required]
+        public int Date { get; set; }
     }
 }
