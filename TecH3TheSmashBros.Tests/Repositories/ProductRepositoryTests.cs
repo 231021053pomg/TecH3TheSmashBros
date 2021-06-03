@@ -27,7 +27,8 @@ namespace TecH3TheSmashBros.Tests
                 Title = "product",
                 Storage = 100,
                 CategoryId = 1,
-                Price = 100
+                Price = 100,
+                Images = "img1.png,img2.png"
 
             });
             _context.Product.Add(new Product
@@ -35,7 +36,8 @@ namespace TecH3TheSmashBros.Tests
                 Title = "product2",
                 Storage = 40,
                 CategoryId = 2,
-                Price = 100
+                Price = 100,
+                Images = "img2.png,img3.png"
 
             });
             _context.Product.Add(new Product
@@ -43,7 +45,8 @@ namespace TecH3TheSmashBros.Tests
                 Title = "product3",
                 Storage = 50,
                 CategoryId = 2,
-                Price = 70
+                Price = 70,
+                Images = "img4.png,img5.png"
 
             });
             _context.SaveChanges();
@@ -53,7 +56,7 @@ namespace TecH3TheSmashBros.Tests
         public async void GetAllProducts()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
             //act
             var products = await productRepository.GetAllProducts();
             //assert
@@ -65,7 +68,7 @@ namespace TecH3TheSmashBros.Tests
         public async void GetProductById()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
             //act
             var product = await productRepository.GetProductById(2);
             //assert
@@ -77,7 +80,7 @@ namespace TecH3TheSmashBros.Tests
         public async void GetAllProductsByCategory()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
             var categoryId = 2;
             //act
             var products = await productRepository.GetProductsByCategory(categoryId);
@@ -91,14 +94,14 @@ namespace TecH3TheSmashBros.Tests
         public async void CreateProduct()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
             var _product = new Product
             {
                 Title = "new product",
                 Storage = 50,
                 CategoryId = 4,
-                Price = 70
-
+                Price = 70,
+                Images = "new_image.jpeg"
             };
 
             //act
@@ -115,13 +118,14 @@ namespace TecH3TheSmashBros.Tests
         public async void UpdateProduct()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
             var _product = new Product
             {
                 Title = "updated product",
                 Storage = 50,
                 CategoryId = 4,
-                Price = 70
+                Price = 70,
+                Images = "new_image.jpeg"
 
             };
 
@@ -140,7 +144,7 @@ namespace TecH3TheSmashBros.Tests
         public async void DeleteProduct()
         {
             //arrange
-            ProductRepository productRepository = new ProductRepository(_context);
+            ProductRepository productRepository = new(_context);
 
             var productId = 1;
 
@@ -150,19 +154,6 @@ namespace TecH3TheSmashBros.Tests
             //assert
             Assert.NotNull(product);
             Assert.NotNull(product.DeletedAt);
-        }
-
-        [Fact]
-        public async void GetImagesByProductId()
-        {
-            //Tilføjer her senere når jeg laver Image Repo
-
-            //arrange
-
-            //act
-
-            //assert
-
         }
     }
 }
