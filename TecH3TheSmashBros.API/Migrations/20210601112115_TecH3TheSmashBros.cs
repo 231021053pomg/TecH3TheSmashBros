@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TecH3TheSmashBros.API.Migrations
 {
-    public partial class models : Migration
+    public partial class TecH3TheSmashBros : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -139,7 +139,7 @@ namespace TecH3TheSmashBros.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true)

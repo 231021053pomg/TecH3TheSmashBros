@@ -155,8 +155,7 @@ namespace TecH3TheSmashBros.Tests
         [Fact]
         public async void GetImagesByProductId()
         {
-            
-            //Tilføjer her senere når jeg laver Image Repo
+            //TilfÃ¸jer her senere nÃ¥r jeg laver Image Repo
 
             //arrange
 
