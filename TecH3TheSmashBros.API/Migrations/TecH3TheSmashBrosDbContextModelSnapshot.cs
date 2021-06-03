@@ -83,9 +83,9 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Zipcode")
+                    b.Property<int>("Zipcode")
                         .HasMaxLength(16)
-                        .HasColumnType("float");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -129,6 +129,9 @@ namespace TecH3TheSmashBros.API.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("Date")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime");
