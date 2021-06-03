@@ -21,5 +21,8 @@ namespace TecH3TheSmashBros.API.Models
 
         [Required]
         public int Price { get; set; }
+
+        [Required]
+        public string Images { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace TecH3TheSmashBros.Tests
                 .UseInMemoryDatabase(databaseName: "CategoryDatabase")
                 .Options;
 
-            _context = new TecH3TheSmashBrosDbContext(_options);
+            _context = new (_options);
 
             _context.Database.EnsureDeleted();
             _context.Category.Add(new Category
@@ -44,7 +44,7 @@ namespace TecH3TheSmashBros.Tests
         public async Task GetAllCategories()
         {
             // Arange
-            CategoryRepository categoryRepository = new CategoryRepository(_context);
+            CategoryRepository categoryRepository = new(_context);
 
             // act
             var category = await categoryRepository.GetAllCategories();
@@ -57,7 +57,7 @@ namespace TecH3TheSmashBros.Tests
         public async Task DeleteId_ShouldDeleteCategory()
         {
             // Arange
-            CategoryRepository categoryRepository = new CategoryRepository(_context);
+            CategoryRepository categoryRepository = new (_context);
             // Act
             int categoryId = 1;
             var category = await categoryRepository.DeleteCatagory(categoryId);
@@ -71,9 +71,9 @@ namespace TecH3TheSmashBros.Tests
         public async Task UpdateId_ShouldUpdateCategory()
         {
             // Arange
-            CategoryRepository categoryRepository = new CategoryRepository(_context);
+            CategoryRepository categoryRepository = new(_context);
             int categoryId = 1;
-            Category categoryupdate = new Category
+            Category categoryupdate = new()
             {
                 Title = "Polo"
             };
@@ -90,8 +90,8 @@ namespace TecH3TheSmashBros.Tests
         public async Task Create_shouldcreateCategory()
         {
             // arange
-            CategoryRepository categoryRepository = new CategoryRepository(_context);
-            Category newcategory = new Category
+            CategoryRepository categoryRepository = new(_context);
+            Category newcategory = new()
             {
                 Title = "Ulv trøje"
             };
