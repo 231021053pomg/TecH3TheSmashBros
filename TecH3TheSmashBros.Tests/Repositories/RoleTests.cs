@@ -48,11 +48,11 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 RoleRepository roleRepository = new RoleRepository(_context);
 
                 // act
-                var role = await roleRepository.GetAllRoles();
+                var roles = await roleRepository.GetAllRoles();
 
                 // Assert
-                Assert.NotNull(role);
-                Assert.Equal(3, role.Count);
+                Assert.NotNull(roles);
+                Assert.Equal(3, roles.Count);
             }
             [Fact]
             public async Task DeleteId_ShouldDeleteRole()
@@ -64,8 +64,6 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 var role = await roleRepository.DeleteRole(roleId);
                 // Assert
                 Assert.NotNull(role);
-                Assert.Equal(roleId, role.Id);
-                Assert.Equal("User", role.RoleName);
                 Assert.NotNull(role.DeletedAt);
             }
             [Fact]

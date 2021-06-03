@@ -51,11 +51,11 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 UserRepository userRepository = new UserRepository(_context);
 
                 // act
-                var user = await userRepository.GetAllUsers();
+                var users = await userRepository.GetAllUsers();
 
                 // Assert
-                Assert.NotNull(user);
-                Assert.Equal(3, user.Count);
+                Assert.NotNull(users);
+                Assert.Equal(3, users.Count);
             }
             [Fact]
             public async Task DeleteId_ShouldDeleteUser()
@@ -67,8 +67,6 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 var user = await userRepository.DeleteUser(userId);
                 // Assert
                 Assert.NotNull(user);
-                Assert.Equal(userId, user.Id);
-                Assert.Equal("hejmeddig@123.dk", user.Email);
                 Assert.NotNull(user.DeletedAt);
             }
             [Fact]
