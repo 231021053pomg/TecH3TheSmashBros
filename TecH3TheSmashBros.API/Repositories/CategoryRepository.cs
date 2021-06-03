@@ -41,7 +41,7 @@ namespace TecH3TheSmashBros.API.Repositories
 
         public async Task<Category> CreateCategory(Category category)
         {
-            category.CreateAt = DateTime.Now;
+            category.CreatedAt = DateTime.Now;
             _sut.Category.Add(category);
             await _sut.SaveChangesAsync();
             return category;
