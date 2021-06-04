@@ -89,7 +89,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
             Assert.NotNull(order.UpdatedAt);
         }
         [Fact]
-        public async Task Create_shouldCreateCustommer()
+        public async Task Create_shouldCreateOrder()
         {
             // arange
             OrderRepository orderRepository = new OrderRepository(_context);
