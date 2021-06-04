@@ -48,6 +48,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.Order
                 .Where(a => a.DeletedAt == null)
+                .Include(a => a.OrderDetails)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 

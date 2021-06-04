@@ -86,7 +86,6 @@ namespace TecH3TheSmashBros.Tests.Repositories
             Assert.NotNull(order);
             Assert.NotNull(order.UpdatedAt);
             Assert.Equal(orderId, order.Id);
-            Assert.NotNull(order.UpdatedAt);
         }
         [Fact]
         public async Task Create_shouldCreateOrder()
