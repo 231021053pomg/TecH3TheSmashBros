@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
-    interface IOrderDetailRepository
+    public interface IOrderDetailRepository
     {
         Task<OrderDetail> CreateOrderDetail(OrderDetail orderDetail);
 
