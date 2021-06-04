@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         Task<List<User>> GetAllUsers();
 
