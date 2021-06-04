@@ -27,18 +27,18 @@ namespace TecH3TheSmashBros.Tests.Repositories
             {
                 Id = 1,
                 UserId = 1,
-                Date = 03 - 06 - 2021
+                Date = new DateTime(2016, 12, 31)
             });
             _context.Order.Add(new Order
             {
                 Id = 2,
                 UserId = 2,
-                Date = 02 - 06 - 2021
+                Date = new DateTime(2020, 08, 30)
             }); _context.Order.Add(new Order
             {
                 Id = 3,
                 UserId = 3,
-                Date = 01 - 06 - 2021
+                Date = new DateTime(2021, 04, 06)
             });
             _context.SaveChanges();
         }
@@ -74,20 +74,39 @@ namespace TecH3TheSmashBros.Tests.Repositories
             // Arange
             OrderRepository orderRepository = new OrderRepository(_context);
             int orderId = 1;
-            Customer customerupdate = new Customer
+            Order orderupdate = new Order
             {
-                FirstName = "Recep Berk",
-                LastName = "Catal"
+                Id = 1,
+                UserId = 1,
+                Date = new DateTime(2013, 12, 05)
             };
             // Act
-            var customer = await customerRepository.UpdateCustomer(1, customerupdate);
+            var order = await orderRepository.UpdateOrder(1, orderupdate);
             // Assert
-            Assert.NotNull(customer);
-            Assert.Equal(customerId, customer.Id);
-            Assert.Equal("Recep Berk", customer.FirstName);
-            Assert.Equal("Catal", customer.LastName);
-            Assert.NotNull(customer.UpdatedAt);
+            Assert.NotNull(order);
+            Assert.NotNull(order.UpdatedAt);
+            Assert.Equal(orderId, order.Id);
+            Assert.NotNull(order.UpdatedAt);
+        }
+        [Fact]
+        public async Task Create_shouldCreateCustommer()
+        {
+            // arange
+            OrderRepository orderRepository = new OrderRepository(_context);
+            Order newOrder = new Order
+            {
+                Date = new DateTime(2015, 12, 31)
+            };
+            
+            List<Order> orders = await orderRepository.GetAllOrders();
 
+            // act
+            var order = await orderRepository.CreateOrder(newOrder);
+
+            // assert
+            Assert.NotNull(order);
+            Assert.NotEqual(DateTime.MinValue, order.CreatedAt);
+            Assert.Equal(orders.Count + 1, order.Id);
         }
     }
 }
