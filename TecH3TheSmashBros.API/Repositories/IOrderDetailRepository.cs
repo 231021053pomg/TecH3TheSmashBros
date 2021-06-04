@@ -8,17 +8,13 @@ namespace TecH3TheSmashBros.API.Repositories
 {
     interface IOrderDetailRepository
     {
-        Task<List<OrderDetailRepository>> GetAllOrderDetails();
+        Task<OrderDetail> CreateOrderDetail(OrderDetail orderDetail);
 
-        Task<OrderDetailRepository> GetOrderDetailById(int id);
+        Task<OrderDetail> UpdateOrderDetail(int id, OrderDetail orderDetail);
 
-        Task<OrderDetailRepository> CreateOrderDetail(OrderDetail orderdetail);
+        Task<OrderDetail> DeleteOrderDetail(int id);
 
-        Task<OrderDetailRepository> UpdateOrderDetail(int id, OrderDetail orderdetail);
-
-        Task<OrderDetailRepository> DeleteOrderDetail(int id);
-
-        Task<List<OrderDetailRepository>> GetAllOrderDetailsByOrder(int orderNumberId);
+        Task<List<OrderDetail>> GetAllOrderDetailsByOrder(int orderNumberId);
 
     }
 }

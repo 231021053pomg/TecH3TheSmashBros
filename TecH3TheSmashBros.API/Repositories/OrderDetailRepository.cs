@@ -17,26 +17,14 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             _sut = sut;
         }
-        public async Task<List<OrderDetailRepository>> GetAllOrderDetails()
+        public async Task<OrderDetail> CreateOrderDetail(OrderDetail orderDetail)
         {
-            return await _sut.OrderDetail
-                .Where(a => a.DeletedAt == null)
-                .ToListAsync();
-        }
-        public async Task<OrderDetailRepository> GetOrderDetailById(int id)
-        {
-            return await _sut.OrderDetail
-                .Where(a => a.DeletedAt == null)
-                .FirstOrDefaultAsync(a => a.Id == id);
-        }
-        public async Task<OrderDetailRepository> CreateOrderDetail(OrderDetail orderdetail)
-        {
-            orderdetail.CreatedAt = DateTime.Now;
-            _sut.OrderDetail.Add(orderdetail);
+            orderDetail.CreatedAt = DateTime.Now;
+            _sut.OrderDetail.Add(orderDetail);
             await _sut.SaveChangesAsync();
-            return orderdetail;
+            return orderDetail;
         }
-        public async Task<OrderDetailRepository> UpdateOrderDetail(int id, OrderDetail orderdetail)
+        public async Task<OrderDetail> UpdateOrderDetail(int id, OrderDetail orderdetail)
         {
             var editOrderDetail = await _sut.OrderDetail.FirstOrDefaultAsync(a => a.Id == id);
             if (editOrderDetail != null)
@@ -50,7 +38,7 @@ namespace TecH3TheSmashBros.API.Repositories
             }
             return editOrderDetail;
         }
-        public async Task<OrderDetailRepository> DeleteOrderDetail(int id)
+        public async Task<OrderDetail> DeleteOrderDetail(int id)
         {
             var orderdetail = await _sut.OrderDetail.FirstOrDefaultAsync(a => a.Id == id);
             if (orderdetail != null)
@@ -60,7 +48,7 @@ namespace TecH3TheSmashBros.API.Repositories
             }
             return orderdetail;
         }
-        public async Task<List<OrderDetailRepository>> GetAllOrderDetailsByOrder(int orderNumberId)
+        public async Task<List<OrderDetail>> GetAllOrderDetailsByOrder(int orderNumberId)
         {
             return await _sut.OrderDetail
                 .Where(a => a.DeletedAt == null && a.OrderId == orderNumberId)

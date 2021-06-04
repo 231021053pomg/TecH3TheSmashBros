@@ -45,23 +45,10 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
             }
             [Fact]
-            public async Task GetAllOrderDetails()
-            {
-                // Arange
-                OrderDetailRepository orderdetailRepository = new OrderDetailRepository(_context);
-
-                // act
-                var orderdetails = await orderdetailRepository.GetAllOrderDetails();
-
-                // Assert
-                Assert.NotNull(orderdetails);
-                Assert.Equal(3, orderdetails.Count);
-            }
-            [Fact]
             public async Task DeleteId_ShouldDeleteOrderDetail()
             {
                 // Arange
-                OrderDetailRepository orderdetailRepository = new OrderDetailRepository(_context);
+                OrderDetailRepository orderdetailRepository = new(_context);
                 // Act
                 int orderdetailId = 1;
                 var orderdetail = await orderdetailRepository.DeleteOrderDetail(orderdetailId);
@@ -73,9 +60,9 @@ namespace TecH3TheSmashBros.Tests.Repositories
             public async Task UpdateId_ShouldUpdateOrderDetail()
             {
                 // Arange
-                OrderDetailRepository orderdetailRepository = new OrderDetailRepository(_context);
+                OrderDetailRepository orderdetailRepository = new(_context);
                 int orderdetailId = 1;
-                OrderDetail orderdetailupdate = new OrderDetail
+                OrderDetail orderdetailupdate = new()
                 {
                     Price = 144,
                     Amount = 5
@@ -94,13 +81,12 @@ namespace TecH3TheSmashBros.Tests.Repositories
             public async Task Create_shouldcreateOrderDetail()
             {
                 // arange
-                OrderDetailRepository orderdetailRepository = new OrderDetailRepository(_context);
-                OrderDetail neworderdetail = new OrderDetail
+                OrderDetailRepository orderdetailRepository = new(_context);
+                OrderDetail neworderdetail = new()
                 {
                     Price = 123,
                     Amount = 2
                 };
-                List<OrderDetail> orderdetails = await orderdetailRepository.GetAllOrderDetails();
 
                 // act
                 var orderdetail = await orderdetailRepository.CreateOrderDetail(neworderdetail);
@@ -108,7 +94,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 // assert
                 Assert.NotNull(orderdetail);
                 Assert.NotEqual(DateTime.MinValue, orderdetail.CreatedAt);
-                Assert.Equal(orderdetails.Count + 1, orderdetail.Id);
+                Assert.Equal(4, orderdetail.Id);
             }
 
         }
