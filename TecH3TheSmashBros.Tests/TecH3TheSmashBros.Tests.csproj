@@ -24,4 +24,8 @@
     <ProjectReference Include="..\TecH3TheSmashBros.API\TecH3TheSmashBros.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
