@@ -7,7 +7,7 @@ using TecH3TheSmashBros.API.Repositories;
 
 namespace TecH3TheSmashBros.API.Services
 {
-    public class OrderService : IOrderServices
+    public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IOrderDetailRepository _orderdetailsRepository;
