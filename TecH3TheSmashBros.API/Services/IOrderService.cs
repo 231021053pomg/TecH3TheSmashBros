@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Services
 {
-    interface IOrderServices
+    interface IOrderService
     {
         Task<List<Order>> GetAllOrder();
         Task<Order> GetOrderById(int id);
