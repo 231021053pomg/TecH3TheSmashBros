@@ -19,6 +19,6 @@ namespace TecH3TheSmashBros.API.Repositories
         Task<User> UpdateUser(int id, User user);
 
         Task<User> DeleteUser(int id);
-
+        
     }
 }

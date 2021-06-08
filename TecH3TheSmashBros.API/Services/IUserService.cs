@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Services
 {
-    interface IUserService
+    public interface IUserService
     {
 
         Task<List<User>> GetAllUsers();
