@@ -49,6 +49,14 @@ namespace TecH3TheSmashBros.Tests
                 Images = "img4.png,img5.png"
 
             });
+            _context.Category.Add(new Category
+            {
+                Title = "Category1"
+            });
+            _context.Category.Add(new Category
+            {
+                Title = "Category2"
+            });
             _context.SaveChanges();
         }
 
@@ -57,11 +65,14 @@ namespace TecH3TheSmashBros.Tests
         {
             //arrange
             ProductRepository productRepository = new(_context);
+            CategoryRepository categoryRepository = new(_context);
             //act
             var products = await productRepository.GetAllProducts();
+            var categories = await categoryRepository.GetAllCategories();
             //assert
             Assert.NotNull(products);
             Assert.Equal(3, products.Count);
+            Assert.Equal(products[0].CategoryId, categories[0].Id);
         }
 
         [Fact]

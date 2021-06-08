@@ -20,27 +20,27 @@ namespace TecH3TheSmashBros.API.Services
 
         public Task<List<Product>> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _productRepository.GetAllProducts();
         }
 
         public Task<List<Product>> GetAllProductsByCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetProductsByCategory(categoryId);
         }
 
         public Task<Product> GetProductById(int id)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetProductById(id);
         }
 
         public Task<Product> CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.CreateProduct(product);
         }
 
         public Task<Product> UpdateProduct(int id, Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.UpdateProduct()
         }
 
         public Task<Product> DeleteProduct(int id)

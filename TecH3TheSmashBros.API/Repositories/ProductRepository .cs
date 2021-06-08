@@ -43,6 +43,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.Product
                 .Where(a => a.DeletedAt == null)
+                .Include(a => a.CategoryId)
                 .ToListAsync();
         }
 
@@ -50,6 +51,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.Product
                 .Where(a => a.DeletedAt == null)
+                .Include(a => a.CategoryId)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
@@ -57,6 +59,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.Product
                 .Where(a => a.DeletedAt == null && a.CategoryId == categoryId)
+                .Include(a => a.CategoryId)
                 .ToListAsync();
         }
 
