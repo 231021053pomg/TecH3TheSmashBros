@@ -16,5 +16,8 @@ namespace TecH3TheSmashBros.API.Models
 
         [ForeignKey("Role.Id")]
         public int RoleId { get; set; }
+
+        [ForeignKey("Customer.Id")]
+        public int CustomerId { get; set; }
     }
 }

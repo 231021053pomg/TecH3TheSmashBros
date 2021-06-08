@@ -13,8 +13,8 @@ namespace TecH3TheSmashBros.API.Services
         Task<User> GetUserById(int id);
         Task<User> CreateUser(User user, Role role);
         Task<User> CreateUser(User user, Role role, Customer customer);
-        Task<User> UpdateUser(int id, Role role);
-        Task<User> UpdateUser(int id, Role role, Customer customer);
+        Task<User> UpdateUser(int id, User user, Role role);
+        Task<User> UpdateUser(int id, User user, Role role, Customer customer);
         Task<User> DeleteUser(int id);
         
 
