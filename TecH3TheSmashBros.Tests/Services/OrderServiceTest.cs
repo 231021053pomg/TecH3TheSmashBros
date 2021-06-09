@@ -14,9 +14,9 @@ namespace TecH3TheSmashBros.Tests.Services
 
     public class OrderServiceTest
     {
-    private readonly OrderService _sut;
-    private readonly Mock<IOrderRepository> _OrderServicesMock = new();
-    private readonly Mock<IOrderDetailRepository> _OrderDetailServiceMock = new();
+        private readonly OrderService _sut;
+        private readonly Mock<IOrderRepository> _OrderServicesMock = new();
+        private readonly Mock<IOrderDetailRepository> _OrderDetailServiceMock = new();
         public OrderServiceTest()
         {
             _sut = new OrderService(_OrderServicesMock.Object, _OrderDetailServiceMock.Object);
@@ -41,13 +41,13 @@ namespace TecH3TheSmashBros.Tests.Services
             // Arange
             int id = 1;
             int UserId = 1;
-            DateTime Date = new DateTime(2021,07,06);
+            DateTime Date = new DateTime(2021, 07, 06);
 
             Order mockOrder = new Order
             {
-            Id = id,
-            UserId = UserId,
-            Date = Date 
+                Id = id,
+                UserId = UserId,
+                Date = Date
             };
             _OrderServicesMock
                 .Setup(x => x.GetById(mockOrder.Id))
@@ -62,7 +62,6 @@ namespace TecH3TheSmashBros.Tests.Services
             Assert.Equal(id, order.Id);
             Assert.Equal(UserId, order.UserId);
             Assert.Equal(Date, order.Date);
-
         }
         [Fact]
         public async Task ListAllOrders()
@@ -95,5 +94,59 @@ namespace TecH3TheSmashBros.Tests.Services
             // Assert
             Assert.Equal(newlist, order);
         }
+        [Fact]
+        public async Task DeleteOrder()
+        {
+            // Arange
+            int id = 1;
+            int UserId = 1;
+            DateTime Date = new DateTime(2021, 07, 06);
+
+            Order mockOrder = new Order
+            {
+                Id = id,
+                UserId = UserId,
+                Date = Date
+            };
+            _OrderServicesMock
+                .Setup(x => x.DeleteOrder(mockOrder.Id))
+                .ReturnsAsync(mockOrder);
+
+            // Act
+            var order = await _sut.Delete(mockOrder.Id);
+
+            // Assert
+            Assert.NotNull(mockOrder);
+        }
+        [Fact]
+        public async Task UpdateOrder()
+        {
+            // Arange
+            _OrderServicesMock
+                .Setup(x => x.UpdateOrder(It.IsAny<int>(),It.IsAny<Order>()))
+                .ReturnsAsync(new Order());
+
+            // Act
+            var order = await _sut.Update(0,new Order(), new List<OrderDetail>());
+            
+            // Assert
+            Assert.NotNull(order);
+        }
+        [Fact]
+        public async Task CreateOrder()
+        {
+            // Arange
+            _OrderServicesMock
+                .Setup(x => x.CreateOrder(It.IsAny<Order>()))
+                .ReturnsAsync(new Order());
+
+            // Act
+            var order = await _sut.Create(new Order(),new List<OrderDetail>());
+
+            // Assert
+            Assert.NotNull(order);
+        }
     }
 }
+
+

@@ -11,7 +11,7 @@ namespace TecH3TheSmashBros.API.Models
     {
 
         [ForeignKey("Prodcuts.Id")]
-        public string ProductsId { get; set; }
+        public int ProductsId { get; set; }
 
         public int Price { get; set; }
 
