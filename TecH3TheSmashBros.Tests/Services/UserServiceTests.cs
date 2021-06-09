@@ -20,12 +20,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
         public UserServiceTests()
         {
             _sut = new UserService(_userRepositoryMock.Object, _roleRepositoryMock.Object, _customerRepositoryMock.Object);
-            _sut.User.Add(new User
-            {
-                Id = 1,
-                Email = "Albert",
-                Password = "Andersen"
-            });
+            
         }
         [Fact]
         public async Task GetById_ShouldReturnNull_WhenUserDoesNotExist()
@@ -141,36 +136,36 @@ namespace TecH3TheSmashBros.Tests.Repositories
 
         }
         
-            [Fact]
-        public async Task Update_ShouldReturnUser_WhenUserIsUpdated()
-        {
-            //Arrange
+        //    [Fact]
+        //public async Task Update_ShouldReturnUser_WhenUserIsUpdated()
+        //{
+        //    //Arrange
             
-            int id = 1;
-            Role createdRole = new Role
-            {
-                Id = 1,
-                RoleName = "Admin"
-            };
-            User updateUser = new User { Email = "albert@andersen.dk", Password = "1234" };
-            //Act
-            var user = await _sut.UpdateUser(id,updateUser,createdRole);
-            //Assert
-            Assert.NotNull(user);
-            Assert.Equal(id, user.Id);
-            Assert.Equal(updateUser.Email, user.Email);
-            Assert.Equal(updateUser.Password, user.Password);
-            Assert.NotNull(user.UpdatedAt);
-        }
-        [Fact]
-        public async Task Delete_ShouldReturnUser_WhenUserIsDeleted()
-        {
-            //Arrange
+        //    //int id = 1;
+        //    //Role createdRole = new Role
+        //    //{
+        //    //    Id = 1,
+        //    //    RoleName = "Admin"
+        //    //};
+        //    //User updateUser = new User { Id = 1, Email = "albert@andersen.dk", Password = "1234" };
+        //    ////Act
+        //    //var user = await _sut.UpdateUser(id,updateUser,createdRole);
+        //    ////Assert
+        //    //Assert.NotNull(user);
+        //    //Assert.Equal(id, user.Id);
+        //    //Assert.Equal(updateUser.Email, user.Email);
+        //    //Assert.Equal(updateUser.Password, user.Password);
+        //    //Assert.NotNull(user.UpdatedAt);
+        //}
+        //[Fact]
+        //public async Task Delete_ShouldReturnUser_WhenUserIsDeleted()
+        //{
+        //    //Arrange
 
-            //Act
+        //    //Act
 
-            //Assert
-        }
+        //    //Assert
+        //}
 
     }
 
