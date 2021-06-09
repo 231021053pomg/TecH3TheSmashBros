@@ -48,7 +48,7 @@ namespace TecH3TheSmashBros.Tests.Services
         {
             //arrange
             productRepositoryMock
-                .Setup(x => x.GetProductsByCategory(0))
+                .Setup(x => x.GetProductsByCategory(It.IsAny<int>()))
                 .ReturnsAsync(() => new List<Product> { new Product(), new Product() });
             //action
             var products = await productService.GetAllProductsByCategory(0);
@@ -63,7 +63,7 @@ namespace TecH3TheSmashBros.Tests.Services
         {
             //arrange
             productRepositoryMock
-                .Setup(x => x.GetProductById(0))
+                .Setup(x => x.GetProductById(It.IsAny<int>()))
                 .ReturnsAsync(() => new Product());
             //action
             var product = await productService.GetProductById(0);
@@ -76,10 +76,10 @@ namespace TecH3TheSmashBros.Tests.Services
         {
             //arrange
             productRepositoryMock
-                .Setup(x => x.CreateProduct(new Product()))
+                .Setup(x => x.CreateProduct(It.IsAny<Product>()))
                 .ReturnsAsync(() => new Product());
             //action
-            var product = await productService.CreateProduct(new Product());
+            var product = await productService.CreateProduct(new Product(),new Category());
 
             //assert
             Assert.NotNull(product);
@@ -87,27 +87,62 @@ namespace TecH3TheSmashBros.Tests.Services
         [Fact]
         public async Task UpdateProduct()
         {
-
+            //arrange
+            productRepositoryMock
+                .Setup(x => x.UpdateProduct(It.IsAny<int>(), It.IsAny<Product>()))
+                .ReturnsAsync(() => new Product());
+            //action
+            var product = await productService.UpdateProduct(0, new Product(), new Category());
+            //assert
+            Assert.NotNull(product);
         }
         [Fact]
         public async Task DeleteProduct()
         {
-
+            //arrange
+            productRepositoryMock
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(() => new Product());
+            //action
+            var product = await productService.DeleteProduct(0);
+            //assert
+            Assert.NotNull(product);
         }
         [Fact]
         public async Task GetAllCategories()
         {
-
+            //arrange
+            categoryRepositoryMock
+                .Setup(x => x.GetAllCategories())
+                .ReturnsAsync(() => new List<Category>());
+            //action
+            var products = await productService.GetAllCategories();
+            //assert
+            Assert.NotNull(products);
         }
         [Fact]
         public async Task CreateCategory()
         {
-
+            //arrange
+            categoryRepositoryMock
+                .Setup(x => x.CreateCategory(It.IsAny<Category>()))
+                .ReturnsAsync(() => new Category());
+            //action
+            var product = await productService.CreateCategory(new Category());
+            //assert
+            Assert.NotNull(product);
         }
         [Fact]
         public async Task DeleteCategory()
         {
-
+            //arrange
+            categoryRepositoryMock
+                .Setup(x => x.DeleteCatagory(It.IsAny<int>()))
+                .ReturnsAsync(() => new Category());
+            //action
+            var product = await productService.DeleteCategory(0);
+            //assert
+            Assert.NotNull(product);
         }
     }
 }

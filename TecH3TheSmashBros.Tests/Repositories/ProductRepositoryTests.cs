@@ -35,7 +35,7 @@ namespace TecH3TheSmashBros.Tests
             {
                 Title = "product2",
                 Storage = 40,
-                CategoryId = 2,
+                CategoryId = 1,
                 Price = 100,
                 Images = "img2.png,img3.png"
 
@@ -106,7 +106,7 @@ namespace TecH3TheSmashBros.Tests
         {
             //arrange
             ProductRepository productRepository = new(_context);
-            var _product = new Product
+            var new_product = new Product
             {
                 Title = "new product",
                 Storage = 50,
@@ -116,13 +116,13 @@ namespace TecH3TheSmashBros.Tests
             };
 
             //act
-            var product = await productRepository.CreateProduct(_product);
+            var product = await productRepository.CreateProduct(new_product);
             var products = await productRepository.GetAllProducts();
 
             //assert
             Assert.NotNull(product);
             Assert.True(products.Count > 3);
-            Assert.Equal(_product, product);
+            Assert.Equal(new_product, product);
         }
 
         [Fact]

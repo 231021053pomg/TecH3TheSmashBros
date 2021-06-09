@@ -19,6 +19,8 @@ namespace TecH3TheSmashBros.API.Models
         [ForeignKey("Category.Id")]
         public int CategoryId { get; set; }
 
+        public Category Category { get; set; }
+
         [Required]
         public int Price { get; set; }
 
