@@ -10,8 +10,8 @@ namespace TecH3TheSmashBros.API.Services
     {
         Task<List<Order>> GetAllOrder();
         Task<Order> GetOrderById(int id);
-        Task<Order> Create(Order order, List<OrderDetail> orderDetails);
-        Task<Order> Update(int id, Order order, List<OrderDetail> orderDetails);
+        Task<Order> Create(Order order);
+        Task<Order> Update(int id, Order order);
         Task<Order> Delete(int id);
     }
 }

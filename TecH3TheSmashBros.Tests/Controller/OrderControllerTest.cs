@@ -96,11 +96,11 @@ namespace TecH3TheSmashBros.Tests.Controller
                 OrderId = 1
             });
             _orderServiceMock
-                .Setup(s => s.Create(It.IsAny<Order>(), It.IsAny<List<OrderDetail>>()))
+                .Setup(s => s.Create(It.IsAny<Order>()))
                 .ReturnsAsync(order);
 
             // Act
-            var response = await _sut.CreateOrder(order,orderDetails);
+            var response = await _sut.CreateOrder(order);
 
             // Assert
             // specifikt se på det ObjectResult der kommer fra _controller

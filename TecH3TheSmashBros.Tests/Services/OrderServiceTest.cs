@@ -127,7 +127,7 @@ namespace TecH3TheSmashBros.Tests.Services
                 .ReturnsAsync(new Order());
 
             // Act
-            var order = await _sut.Update(0,new Order(), new List<OrderDetail>());
+            var order = await _sut.Update(0,new Order());
             
             // Assert
             Assert.NotNull(order);
@@ -141,7 +141,7 @@ namespace TecH3TheSmashBros.Tests.Services
                 .ReturnsAsync(new Order());
 
             // Act
-            var order = await _sut.Create(new Order(),new List<OrderDetail>());
+            var order = await _sut.Create(new Order());
 
             // Assert
             Assert.NotNull(order);

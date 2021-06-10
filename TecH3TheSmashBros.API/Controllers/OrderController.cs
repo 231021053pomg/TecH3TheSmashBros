@@ -60,7 +60,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(Order order, List<OrderDetail> orderDetails)
+        public async Task<IActionResult> CreateOrder(Order order)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 {
                     return BadRequest("Author Fail.....");
                 }
-                var neworder = await _orderService.Create(order, orderDetails);
+                var neworder = await _orderService.Create(order);
 
                 return Ok(neworder);
             }
@@ -78,7 +78,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Order order, List<OrderDetail> orderDetails)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Order order)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 {
                     return BadRequest("CANNOT UPDATE");
                 }
-                var updateorder = await _orderService.Update(id, order,orderDetails);
+                var updateorder = await _orderService.Update(id, order);
                 if (updateorder == null)
                 {
                     return NotFound("Could not found id");

@@ -28,12 +28,12 @@ namespace TecH3TheSmashBros.API.Services
             var orders = await _orderRepository.GetById(id);
             return orders;
         }
-        public async Task<Order> Create(Order order, List<OrderDetail> orderDetails)
+        public async Task<Order> Create(Order order)
         {
             var newOrder = await _orderRepository.CreateOrder(order);
             return newOrder;
         }
-        public async Task<Order> Update(int id, Order order, List<OrderDetail> orderDetails)
+        public async Task<Order> Update(int id, Order order)
         {
             var updateorder = await _orderRepository.UpdateOrder(id, order);
             return updateorder;
