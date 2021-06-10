@@ -20,6 +20,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.User
                 .Where(a => a.DeletedAt == null)
+                .Include(a => a.Customer)
                 .ToListAsync();
         }
         public async Task<List<User>> GetAllUsersByRole(int roleid)
@@ -32,6 +33,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.User
                 .Where(a => a.DeletedAt == null)
+                .Include(a => a.Customer)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
         public async Task<User> CreateUser(User user)

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TecH3TheSmashBros.API.Database;
 
 namespace TecH3TheSmashBros.API.Migrations
 {
     [DbContext(typeof(TecH3TheSmashBrosDbContext))]
-    partial class TecH3TheSmashBrosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210610111811_RecreationAll")]
+    partial class RecreationAll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

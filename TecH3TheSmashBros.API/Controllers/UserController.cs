@@ -65,7 +65,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user)
         {
@@ -73,18 +73,18 @@ namespace TecH3TheSmashBros.API.Controllers
             return Ok(updateUser);
 
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             var deleteUser = await _userService.DeleteUser(id);
             return Ok(deleteUser);
         }
-#endregion
+        #endregion
 
         #region Roles
 
-        [HttpGet]
+        [HttpGet("{Roles.Id}")]
         public async Task<IActionResult> GetAllRoles()
         {
             try
@@ -100,7 +100,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
 
         }
-        [HttpPost]
+        [HttpPost("{Roles.Id}")]
         public async Task<IActionResult> CreateRole(Role role)
         {
             try
@@ -117,15 +117,15 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("{id}")]
+        [HttpDelete("{Roles.Id}")]
         public async Task<IActionResult> DeleteRole([FromRoute] int id)
         {
             var deleteRole = await _userService.DeleteRole(id);
             return Ok(deleteRole);
         }
         #endregion
-        
-        
+
+
 
     }
 }
