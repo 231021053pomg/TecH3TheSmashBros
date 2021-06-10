@@ -14,6 +14,16 @@ namespace TecH3TheSmashBros.API.Services
 
         Task<Product> GetProductById(int id);
 
-        Task<Product> CreateProduct(Product product);
+        Task<Product> CreateProduct(Product product, Category category);
+
+        Task<Product> UpdateProduct(int id, Product product, Category category);
+
+        Task<Product> DeleteProduct(int id);
+
+        Task<List<Category>> GetAllCategories();
+
+        Task<Category> CreateCategory(Category category);
+
+        Task<Category> DeleteCategory(int id);
     }
 }
