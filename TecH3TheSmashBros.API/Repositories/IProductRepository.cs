@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
         Task<List<Product>> GetAllProducts();
 

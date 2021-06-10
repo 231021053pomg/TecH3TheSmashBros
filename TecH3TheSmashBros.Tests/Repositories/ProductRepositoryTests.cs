@@ -35,7 +35,7 @@ namespace TecH3TheSmashBros.Tests
             {
                 Title = "product2",
                 Storage = 40,
-                CategoryId = 2,
+                CategoryId = 1,
                 Price = 100,
                 Images = "img2.png,img3.png"
 
@@ -49,6 +49,14 @@ namespace TecH3TheSmashBros.Tests
                 Images = "img4.png,img5.png"
 
             });
+            _context.Category.Add(new Category
+            {
+                Title = "Category1"
+            });
+            _context.Category.Add(new Category
+            {
+                Title = "Category2"
+            });
             _context.SaveChanges();
         }
 
@@ -57,11 +65,14 @@ namespace TecH3TheSmashBros.Tests
         {
             //arrange
             ProductRepository productRepository = new(_context);
+            CategoryRepository categoryRepository = new(_context);
             //act
             var products = await productRepository.GetAllProducts();
+            var categories = await categoryRepository.GetAllCategories();
             //assert
             Assert.NotNull(products);
             Assert.Equal(3, products.Count);
+            Assert.Equal(products[0].CategoryId, categories[0].Id);
         }
 
         [Fact]
@@ -86,8 +97,8 @@ namespace TecH3TheSmashBros.Tests
             var products = await productRepository.GetProductsByCategory(categoryId);
             //assert
             Assert.NotNull(products);
-            Assert.Equal(2, products.Count);
-            Assert.Equal(categoryId, products[0].CategoryId);
+            Assert.Single(products);
+            Assert.Equal(2, products[0].CategoryId);
         }
 
         [Fact]
@@ -95,7 +106,7 @@ namespace TecH3TheSmashBros.Tests
         {
             //arrange
             ProductRepository productRepository = new(_context);
-            var _product = new Product
+            var new_product = new Product
             {
                 Title = "new product",
                 Storage = 50,
@@ -105,13 +116,13 @@ namespace TecH3TheSmashBros.Tests
             };
 
             //act
-            var product = await productRepository.CreateProduct(_product);
             var products = await productRepository.GetAllProducts();
+            var product = await productRepository.CreateProduct(new_product);
 
             //assert
             Assert.NotNull(product);
-            Assert.True(products.Count > 3);
-            Assert.Equal(_product, product);
+            Assert.NotEqual(product.CreatedAt, DateTime.MinValue);
+            Assert.Equal(products.Count + 1, product.Id);
         }
 
         [Fact]
