@@ -19,9 +19,9 @@ namespace TecH3TheSmashBros.API.Controllers
         {
             _userService = userService;
         }
-
+        #region Users
         //Gets all Users
-        // https://localhost:5001/api/author
+        // https://localhost:5001/api/user
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -49,7 +49,7 @@ namespace TecH3TheSmashBros.API.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> CreateUser(User user, Role role)
+        public async Task<IActionResult> CreateUser([FromBody] User user)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 {
                     return BadRequest("User Fail....");
                 }
-                var newUser = await _userService.CreateUser(user, role);
+                var newUser = await _userService.CreateUser(user);
                 return Ok(newUser);
             }
             catch (Exception ex)
@@ -65,47 +65,24 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateUser(User user, Role role, Customer customer)
-        {
-            try
-            {
-                if (user == null)
-                {
-                    return BadRequest("User Fail....");
-                }
-                var newUser = await _userService.CreateUser(user, role, customer);
-                return Ok(newUser);
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-
-        }
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user, Role role)
+        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user)
         {
-            var updateUser = await _userService.UpdateUser(id, user, role);
+            var updateUser = await _userService.UpdateUser(id, user);
             return Ok(updateUser);
 
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user, Role role, Customer customer)
-        {
-            var updateUser = await _userService.UpdateUser(id, user, role, customer);
-            return Ok(updateUser);
-
-        }
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             var deleteUser = await _userService.DeleteUser(id);
             return Ok(deleteUser);
         }
+#endregion
 
-
-
+        #region Roles
 
         [HttpGet]
         public async Task<IActionResult> GetAllRoles()
@@ -146,8 +123,9 @@ namespace TecH3TheSmashBros.API.Controllers
             var deleteRole = await _userService.DeleteRole(id);
             return Ok(deleteRole);
         }
-
-
+        #endregion
+        
+        
 
     }
 }

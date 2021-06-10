@@ -105,11 +105,6 @@ namespace TecH3TheSmashBros.Tests.Repositories
         {
             //Arrange
 
-            Role createdRole = new Role
-            {
-                Id = 1,
-                RoleName = "Admin"
-            };
 
             User newUser = new User
             {
@@ -129,7 +124,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 .ReturnsAsync(createdUser);
 
             //Act
-            var user = await _sut.CreateUser(newUser,createdRole);
+            var user = await _sut.CreateUser(newUser);
             //Assert
             Assert.NotNull(user);
             Assert.NotEqual(DateTime.MinValue, user.CreatedAt);

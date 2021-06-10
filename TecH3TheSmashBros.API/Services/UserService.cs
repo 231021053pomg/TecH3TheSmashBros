@@ -29,33 +29,18 @@ namespace TecH3TheSmashBros.API.Services
             var users = await _userRepository.GetUserById(id);
             return users;
         }
-        public async Task<User> CreateUser(User user, Role role)
+        public async Task<User> CreateUser(User user)
         {
             var newUser = await _userRepository.CreateUser(user);
-            await _roleRepository.UpdateRole(newUser.RoleId, role);
             return newUser;
         }
-        public async Task<User> CreateUser(User user, Role role, Customer customer)
-        {
-            var newUser = await _userRepository.CreateUser(user);
-            await _roleRepository.UpdateRole(newUser.RoleId, role);
-            await _customerRepository.CreateCustomer(customer);
-            return newUser;
-        }
-        public async Task<User> UpdateUser(int id, User user, Role role)
+        public async Task<User> UpdateUser(int id, User user)
         {
             var editUpdate = await _userRepository.UpdateUser(id, user);
-            await _roleRepository.UpdateRole(editUpdate.RoleId, role);
 
             return editUpdate;
         }
-        public async Task<User> UpdateUser(int id, User user, Role role, Customer customer)
-        {
-            var editUpdate = await _userRepository.UpdateUser(id, user);
-            await _roleRepository.UpdateRole(editUpdate.RoleId, role);
-            await _customerRepository.UpdateCustomer(editUpdate.CustomerId, customer);
-            return editUpdate;
-        }
+       
         public async Task<User> DeleteUser(int id)
         {
             var user = await _userRepository.DeleteUser(id);

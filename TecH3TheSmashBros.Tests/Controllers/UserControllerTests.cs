@@ -64,42 +64,43 @@ namespace TecH3TheSmashBros.Tests
             Assert.Equal(204, StatusCodeResult.StatusCode);
         }
 
-        [Fact]
-        public async Task GetAll_shouldReturn500_IfServiceReturnNull()
-        {
-            //Arrange
+        //[Fact]
+        //public async Task GetAll_shouldReturn500_IfServiceReturnNull()
+        //{
+        //    //Arrange
 
-            //Act
+        //    //Act
 
-            //Assert
-        }
-        #endregion
+        //    //Assert
+        //}
+        //#endregion
 
-        #region GetUserById 1/3
-        [Fact]
-        public async Task GetId_ShouldReturn200_WhenDataExists()
-        {
-            //Arrange
-            _userServiceMock
-                .Setup(x => x.GetUserById(It.IsAny<int>()))
-                .ReturnsAsync(() => null);
+        //#region GetUserById 1/3
+        //[Fact]
+        //public async Task GetById_ShouldReturn200_WhenDataExists()
+        //{
+        //    //Arrange
 
-            //Act
-            var user = await _sut.GetById(13);
-            //Assert
-            var StatusCodeResult = (IStatusCodeActionResult)user;
-            Assert.Equal(200, StatusCodeResult.StatusCode);
-        }
+        //    _userServiceMock
+        //        .Setup(x => x.GetUserById(It.IsAny<int>()))
+        //        .ReturnsAsync(() => null);
 
-        [Fact]
-        public async Task GetId_ShouldReturn404_WhenDataExists()
-        {
+        //    //Act
+        //    var user = await _sut.GetById(1);
+        //    //Assert
+        //    var StatusCodeResult = (IStatusCodeActionResult)user;
+        //    Assert.Equal(200, StatusCodeResult.StatusCode);
+        //}
 
-        }
+        //[Fact]
+        //public async Task GetId_ShouldReturn404_WhenDataExists()
+        //{
 
-        [Fact]
-        public async Task GetId_ShouldReturn500_WhenDataExists()
-        { }
+        //}
+
+        //[Fact]
+        //public async Task GetId_ShouldReturn500_WhenDataExists()
+        //{ }
         #endregion
 
         #region UpdateUser 1/4

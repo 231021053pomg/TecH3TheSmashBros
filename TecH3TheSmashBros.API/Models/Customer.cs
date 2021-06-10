@@ -25,6 +25,9 @@ namespace TecH3TheSmashBros.API.Models
         [Required]
         [StringLength(64, ErrorMessage = "Maximum 64 Chars")]
         public string City { get; set; }
+        
+        [ForeignKey("User.Id")]
+        public int UserId { get; set; }
 
 
     }
