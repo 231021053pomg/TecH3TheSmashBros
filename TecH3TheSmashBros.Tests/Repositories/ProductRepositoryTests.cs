@@ -97,8 +97,8 @@ namespace TecH3TheSmashBros.Tests
             var products = await productRepository.GetProductsByCategory(categoryId);
             //assert
             Assert.NotNull(products);
-            Assert.Equal(2, products.Count);
-            Assert.Equal(categoryId, products[0].CategoryId);
+            Assert.Single(products);
+            Assert.Equal(2, products[0].CategoryId);
         }
 
         [Fact]
@@ -116,13 +116,13 @@ namespace TecH3TheSmashBros.Tests
             };
 
             //act
-            var product = await productRepository.CreateProduct(new_product);
             var products = await productRepository.GetAllProducts();
+            var product = await productRepository.CreateProduct(new_product);
 
             //assert
             Assert.NotNull(product);
-            Assert.True(products.Count > 3);
-            Assert.Equal(new_product, product);
+            Assert.NotEqual(product.CreatedAt, DateTime.MinValue);
+            Assert.Equal(products.Count + 1, product.Id);
         }
 
         [Fact]
