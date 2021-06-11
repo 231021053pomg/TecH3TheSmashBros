@@ -65,7 +65,6 @@ namespace TecH3TheSmashBros.API
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling =
                 ReferenceLoopHandling.Ignore);
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecH3TheSmashBros.API", Version = "v1" });
