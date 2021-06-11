@@ -55,8 +55,7 @@ namespace TecH3TheSmashBros.API
             services.AddScoped<IUserRepository, UserRepository>();
 
             //services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
 
 
