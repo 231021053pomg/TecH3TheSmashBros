@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TecH3TheSmashBros.API.Models;
 using TecH3TheSmashBros.API.Services;
 
 namespace TecH3TheSmashBros.API.Controllers
@@ -46,7 +47,6 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
@@ -54,6 +54,19 @@ namespace TecH3TheSmashBros.API.Controllers
             {
                 var product = await _productService.GetProductById(id);
                 return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(Product product, Category category)
+        {
+            try
+            {
+                var new_product = await _productService.CreateProduct(product, category);
+                return Ok(new_product);
             }
             catch (Exception ex)
             {
