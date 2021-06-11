@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TecH3TheSmashBros.API.Models
@@ -15,6 +16,8 @@ namespace TecH3TheSmashBros.API.Models
         public string Password { get; set; }
 
         [ForeignKey("Role.Id")]
-        public int RoleId { get; set; }
+        public int RoleId { get; set; } = 1;
+
+        public List<Customer>Customer{ get; set; }
     }
 }

@@ -6,7 +6,7 @@ using TecH3TheSmashBros.API.Models;
 
 namespace TecH3TheSmashBros.API.Repositories
 {
-    interface ICustomerRepository
+    public interface ICustomerRepository
     {
         Task<Customer> CreateCustomer(Customer customer);
         Task<List<Customer>> GetAllCustomer();

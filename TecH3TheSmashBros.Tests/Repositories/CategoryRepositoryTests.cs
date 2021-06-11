@@ -9,12 +9,12 @@ using System.Collections.Generic;
 
 namespace TecH3TheSmashBros.Tests
 {
-    public class CategoryRepositoryTests
+    public class CategoryControllerTests
     {
         private readonly DbContextOptions<TecH3TheSmashBrosDbContext> _options;
         private readonly TecH3TheSmashBrosDbContext _context;
 
-        public CategoryRepositoryTests()
+        public CategoryControllerTests()
         {
             _options = new DbContextOptionsBuilder<TecH3TheSmashBrosDbContext>()
                 .UseInMemoryDatabase(databaseName: "CategoryDatabase")
