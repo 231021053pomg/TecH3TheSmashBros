@@ -29,7 +29,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 FirstName = "Berk",
                 LastName = "Catal",
                 Street = "Brøndbyvestervej 18",
-                Zipcode = 2600,
+                Zipcode = "2600",
                 City = "Glostrup"
             });
             _context.Customer.Add(new Customer
@@ -38,7 +38,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 FirstName = "Niklas",
                 LastName = "Dahl",
                 Street = "Buggati street ",
-                Zipcode = 2900,
+                Zipcode = "2900",
                 City = "Hellerup"
             }); _context.Customer.Add(new Customer
             {
@@ -46,7 +46,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 FirstName = "Jack",
                 LastName = "Conradsen",
                 Street = "Ipadvej 40",
-                Zipcode = 2640,
+                Zipcode = "2640",
                 City = "Hedehusene"
             });
             _context.SaveChanges();
@@ -109,7 +109,7 @@ namespace TecH3TheSmashBros.Tests.Repositories
                 FirstName = "Snop",
                 LastName = "Dogg",
                 Street = "WeedStreet",
-                Zipcode = 4200,
+                Zipcode = "4200",
                 City = "Slagelse"
             };
             List<Customer> customers = await customerRepository.GetAllCustomer();

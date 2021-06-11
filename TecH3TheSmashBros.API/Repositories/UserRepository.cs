@@ -27,6 +27,7 @@ namespace TecH3TheSmashBros.API.Repositories
         {
             return await _sut.User
                 .Where(a => a.DeletedAt == null && a.RoleId == roleid)
+                .Include(a => a.Customer)
                 .ToListAsync();
         }
         public async Task<User> GetUserById(int id)

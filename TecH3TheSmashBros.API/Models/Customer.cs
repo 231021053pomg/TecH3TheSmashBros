@@ -19,8 +19,8 @@ namespace TecH3TheSmashBros.API.Models
         public string Street { get; set; }
 
         [Required]
-        [StringLength(16, ErrorMessage = "Maximum 16 Chars")]
-        public int Zipcode { get; set; }
+        [StringLength(12, ErrorMessage = "Maximum 16 Chars")]
+        public string Zipcode { get; set; }
 
         [Required]
         [StringLength(64, ErrorMessage = "Maximum 64 Chars")]

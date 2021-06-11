@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TecH3TheSmashBros.API;
 using TecH3TheSmashBros.API.Models;
 using TecH3TheSmashBros.API.Services;
 
 namespace TecH3TheSmashBros.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -22,7 +18,7 @@ namespace TecH3TheSmashBros.API.Controllers
         #region Users
         //Gets all Users
         // https://localhost:5001/api/user
-        [HttpGet]
+        [HttpGet("user")]
         public async Task<IActionResult> GetAllUsers()
         {
             try
@@ -38,7 +34,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
 
         }
-        [HttpGet("{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var getUser = await _userService.GetUserById(id);
@@ -48,8 +44,8 @@ namespace TecH3TheSmashBros.API.Controllers
 
 
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        [HttpPost("user")]
+        public async Task<IActionResult> CreateUser( User user)
         {
             try
             {
@@ -66,7 +62,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("user/{id}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user)
         {
             var updateUser = await _userService.UpdateUser(id, user);
@@ -74,7 +70,7 @@ namespace TecH3TheSmashBros.API.Controllers
 
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("user/{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {
             var deleteUser = await _userService.DeleteUser(id);
@@ -84,7 +80,7 @@ namespace TecH3TheSmashBros.API.Controllers
 
         #region Roles
 
-        [HttpGet("{Roles.Id}")]
+        [HttpGet("roles")]
         public async Task<IActionResult> GetAllRoles()
         {
             try
@@ -100,7 +96,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
 
         }
-        [HttpPost("{Roles.Id}")]
+        [HttpPost("roles")]
         public async Task<IActionResult> CreateRole(Role role)
         {
             try
@@ -117,7 +113,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("{Roles.Id}")]
+        [HttpDelete("roles/{id}")]
         public async Task<IActionResult> DeleteRole([FromRoute] int id)
         {
             var deleteRole = await _userService.DeleteRole(id);

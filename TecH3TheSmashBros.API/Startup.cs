@@ -55,8 +55,7 @@ namespace TecH3TheSmashBros.API
             services.AddScoped<IUserRepository, UserRepository>();
 
             //services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
 
 
@@ -65,7 +64,6 @@ namespace TecH3TheSmashBros.API
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling =
                 ReferenceLoopHandling.Ignore);
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecH3TheSmashBros.API", Version = "v1" });
