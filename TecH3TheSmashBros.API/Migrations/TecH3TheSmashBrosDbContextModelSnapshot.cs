@@ -83,11 +83,14 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Zipcode")
-                        .HasMaxLength(16)
-                        .HasColumnType("int");
+                    b.Property<string>("Zipcode")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customer");
                 });
@@ -141,8 +144,8 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductsId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime");
@@ -189,6 +192,8 @@ namespace TecH3TheSmashBros.API.Migrations
                         .HasColumnType("datetime");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
                 });
@@ -252,6 +257,15 @@ namespace TecH3TheSmashBros.API.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("TecH3TheSmashBros.API.Models.Customer", b =>
+                {
+                    b.HasOne("TecH3TheSmashBros.API.Models.User", null)
+                        .WithMany("Customer")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TecH3TheSmashBros.API.Models.OrderDetail", b =>
                 {
                     b.HasOne("TecH3TheSmashBros.API.Models.Order", null)
@@ -261,9 +275,25 @@ namespace TecH3TheSmashBros.API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TecH3TheSmashBros.API.Models.Product", b =>
+                {
+                    b.HasOne("TecH3TheSmashBros.API.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("TecH3TheSmashBros.API.Models.Order", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("TecH3TheSmashBros.API.Models.User", b =>
+                {
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

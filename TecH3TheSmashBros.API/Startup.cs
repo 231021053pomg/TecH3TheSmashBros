@@ -21,6 +21,7 @@ namespace TecH3TheSmashBros.API
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,6 +32,17 @@ namespace TecH3TheSmashBros.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                    });
+            });
+
             services.AddDbContext<TecH3TheSmashBrosDbContext>(
                options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection"))
                );
@@ -41,21 +53,21 @@ namespace TecH3TheSmashBros.API
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
 
 
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                options.SerializerSettings.ReferenceLoopHandling =
+                ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TecH3TheSmashBros.API", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
