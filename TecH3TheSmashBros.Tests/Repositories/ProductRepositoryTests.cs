@@ -99,7 +99,7 @@ namespace TecH3TheSmashBros.Tests
             Assert.NotNull(products);
             Assert.Single(products);
             Assert.Equal(2, products[0].CategoryId);
-            Assert.Equal("product", products[0].Title);
+            Assert.Equal("product3", products[0].Title);
         }
 
         [Fact]
