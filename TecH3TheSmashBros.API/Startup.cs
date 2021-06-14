@@ -80,7 +80,10 @@ namespace TecH3TheSmashBros.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TecH3TheSmashBros.API v1"));
             }
 
+
             app.UseHttpsRedirection();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseRouting();
 
