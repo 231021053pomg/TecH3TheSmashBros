@@ -24,6 +24,13 @@ namespace TecH3TheSmashBros.API.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Category> GetCategoryById(int id)
+        {
+            return await _sut.Category
+                .Where(a => a.DeletedAt == null)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+
 
         public async Task<Category> UpdateCategory(int id, Category category)
         {
