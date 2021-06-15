@@ -39,6 +39,25 @@ namespace TecH3TheSmashBros.API.Repositories
             return product;
         }
 
+        public async Task<List<Product>> DeleteProductByCategoryId(int categoryId)
+        {
+            var products = new List<Product> { };
+
+            products = await _sut.Product
+                .Where(a => a.DeletedAt == null && a.CategoryId == categoryId)
+                .ToListAsync();
+
+            if (products != null)
+            {
+                for (int i = 0; i < products.Count; i++)
+                {
+                    products[i].DeletedAt = DateTime.Now;
+                }
+                await _sut.SaveChangesAsync();
+            }
+            return products;
+        }
+
         public async Task<List<Product>> GetAllProducts()
         {
             return await _sut.Product

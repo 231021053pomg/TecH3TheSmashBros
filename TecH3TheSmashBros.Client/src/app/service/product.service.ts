@@ -2,14 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Product } from '../model';
+import { Category, Product } from '../model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductService {
-  apiUrl: string = "https://localhost:5001/api/products";
+  apiUrl: string = "https://localhost:5001/api/";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
@@ -20,8 +20,20 @@ export class ProductService {
   ){ }
 
   getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiUrl).pipe(
+    return this.http.get<Product[]>(this.apiUrl+"products").pipe(
       catchError(this.handleError<Product[]>("getProducts"))
+    )
+  }
+
+  deleteProduct(id: number): Observable<Product>{
+    return this.http.delete<Product>(`${this.apiUrl}products/${id}`).pipe(
+      catchError(this.handleError<Product>("deleteProduct"))
+    )
+  }
+
+  getCategories(): Observable<Category[]>{
+    return this.http.get<Category[]>(`${this.apiUrl}categories`).pipe(
+      catchError(this.handleError<Category[]>("getCategories"))
     )
   }
 

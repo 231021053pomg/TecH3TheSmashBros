@@ -1,6 +1,50 @@
-<p>product-page works!</p>
-<div *ngFor="let product of products">
-    <div class="product">
-        <p>{{product.title}}</p>
+<div class="d-flex">
+    <div class="categories">
+        <a>All products</a>
+        <a *ngFor="let category of categories">{{category.title}}</a>
+    </div>
+    <div class="products">
+        <div class="product" *ngFor="let product of products">
+            <p>{{product.title}}</p>
+            <p>Storage: {{product.storage}}</p>
+            <p>Price: {{product.price}}</p>
+            <a (click)="deleteProduct(product)" class="delete">x</a>
+        </div>
+        <div class="product add-product">
+            <a *ngIf="addProductEnabled === true" (click)="addProductToggle()">+</a>
+            <form *ngIf="addProductEnabled === false" [formGroup]="productForm" (ngSubmit)="addProduct()">
+                <div>
+                    <label for="product-title">
+                      Title
+                    </label>
+                    <input id="product-title" type="text" formControlName="title">
+                </div>
+                <div>
+                    <label for="product-price">
+                      Price
+                    </label>
+                    <input id="product-price" type="number" formControlName="price">
+                </div>
+                <div>
+                    <label for="product-storage">
+                      Storage
+                    </label>
+                    <input id="product-storage" type="number" formControlName="storage">
+                </div>
+                <div>
+                    <label for="product-categoryId">
+                      CategoryId
+                    </label>
+                    <input id="product-categoryId" type="number" formControlName="CategoryId">
+                </div>
+                <div>
+                    <label for="product-images">
+                      Images
+                    </label>
+                    <input id="product-images" type="text" formControlName="images">
+                </div>
+                <button class="button" type="submit">New Product</button>
+            </form>
+        </div>
     </div>
 </div>

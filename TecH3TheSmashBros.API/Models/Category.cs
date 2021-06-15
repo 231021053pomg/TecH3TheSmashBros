@@ -12,6 +12,6 @@ namespace TecH3TheSmashBros.API.Models
         [Required]
         public string Title { get; set; }
         [JsonIgnore]
-        public List<Product> products { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
