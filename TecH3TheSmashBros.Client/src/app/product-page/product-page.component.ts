@@ -13,20 +13,14 @@ export class ProductPageComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   addProductEnabled: boolean = false;
+  productEditId: number = -1;
 
-  productForm = this.formBuilder.group({
-    title: "",
-    price: 0,
-    storage: 0,
-    categoryId: 1,
-    images: "",
-  });
-
+  
   constructor(
-    private productService : ProductService,
-    private formBuilder: FormBuilder
+    private productService : ProductService
+    ) { };
 
-  ) { }
+
 
   ngOnInit( ): void {
     this.getProducts();
@@ -49,13 +43,31 @@ export class ProductPageComponent implements OnInit {
     this.productService.deleteProduct(product.id).subscribe()
   }
 
-  addProduct(): void {
-    console.warn('Your order has been submitted', this.productForm.value);
-    this.productForm.reset();
+  addProduct(): void{
+    //product with id -1 acts as a new valueless product
+    if(this.products.length == 0 || this.products[this.products.length-1].id != -1){
+      var product: Product = {
+        id: -1,
+        title: "",
+        storage: 0,
+        categoryId: 0,
+        price: 0,
+        images: "",
+        category: {id: 0, title: ""}
+      };
+      this.products.push(product);
+      this.productEditId = -1;
+    } 
   }
 
-  addProductToggle(): void{
-    if (this.addProductEnabled) this.addProductEnabled = false;
-    else this.addProductEnabled = true;
+  editProduct(product: Product): void{
+    if(product.id == -1){
+      this.productService.addProduct(product);
+      
+    } else {
+      //update
+    }
+    this.products = this.products.filter(a => a != product);
+    this.productService.deleteProduct(product.id).subscribe()
   }
 }
