@@ -51,6 +51,11 @@ namespace TecH3TheSmashBros.API.Services
             return _productRepository.DeleteProduct(id);
         }
 
+        public Task<List<Product>> DeleteProductByCategoryId(int categoryId)
+        {
+            return _productRepository.DeleteProductByCategoryId(categoryId);
+        }
+
         public Task<List<Category>> GetAllCategories()
         {
             return _categoryRepository.GetAllCategories();

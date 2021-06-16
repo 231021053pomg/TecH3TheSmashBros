@@ -86,7 +86,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpDelete("products/{categoryId}")]
+        [HttpDelete("products/{products_id}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int products_id)
         {
             try
@@ -99,7 +99,20 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpGet("Categories")]
+        [HttpDelete("products/by_category/{category_id}")]
+        public async Task<IActionResult> DeleteProductsByCategoryId([FromRoute] int category_id)
+        {
+            try
+            {
+                var removed_products = await _productService.DeleteProductByCategoryId(category_id);
+                return Ok(removed_products);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        [HttpGet("categories")]
         public async Task<IActionResult> GetAllCategories()
         {
             try
