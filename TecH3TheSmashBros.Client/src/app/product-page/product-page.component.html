@@ -9,6 +9,7 @@
             <p>Storage: {{product.storage}}</p>
             <p>Price: {{product.price}}</p>
             <a (click)="deleteProduct(product)" class="delete">x</a>
+            <a (click)="buyProduct(product)" class="buy">Buy here</a>
         </div>
         <div class="product add-product">
             <a *ngIf="addProductEnabled === true" (click)="addProductToggle()">+</a>

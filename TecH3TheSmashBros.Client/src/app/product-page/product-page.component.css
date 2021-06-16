@@ -59,3 +59,12 @@
 .add-product:hover a{
     transform: scale(1.2);
 }
+.buy{
+    text-align: center;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: blue;
+}

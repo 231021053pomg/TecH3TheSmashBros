@@ -12,3 +12,9 @@ export interface Category{
     id: number;
     title: string;
 }
+export interface CartItem{
+    productid : number,
+    navn: string,
+    pris: number,
+    antal: number
+}

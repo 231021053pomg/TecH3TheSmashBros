@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Category, Product } from '../model';
 import { ProductService } from '../service/product.service';
 
@@ -58,4 +58,8 @@ export class ProductPageComponent implements OnInit {
     if (this.addProductEnabled) this.addProductEnabled = false;
     else this.addProductEnabled = true;
   }
+  // buyProduct(product): void{
+  //   var cart = []
+  //   cart.push({ product.id, })
+  // }
 }
