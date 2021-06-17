@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrderComponent } from './order/order.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     OrderComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

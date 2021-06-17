@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Category, Product } from '../model';
+import { CartItem, Category, Product } from '../model';
+import { BasketService } from '../service/basket.service';
 import { ProductService } from '../service/product.service';
+
+
 
 @Component({
   selector: 'app-product-page',
@@ -9,7 +12,6 @@ import { ProductService } from '../service/product.service';
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit {
-
   products: Product[] = [];
   categories: Category[] = [];
   addProductEnabled: boolean = false;
@@ -24,7 +26,8 @@ export class ProductPageComponent implements OnInit {
 
   constructor(
     private productService : ProductService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private basketService : BasketService
 
   ) { }
 
@@ -32,6 +35,7 @@ export class ProductPageComponent implements OnInit {
     this.getProducts();
     this.getCategories();
   }
+  
 
 
   getProducts(): void {
@@ -62,4 +66,8 @@ export class ProductPageComponent implements OnInit {
   //   var cart = []
   //   cart.push({ product.id, })
   // }
+  AddBasket(product : Product):void{
+    console.log(product.id,product.title,product.price,1);
+    this.basketService.PutInBasket(product.id,product.title,product.price,1);
+  }
 }
