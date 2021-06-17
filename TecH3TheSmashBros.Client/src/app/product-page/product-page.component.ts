@@ -12,8 +12,8 @@ export class ProductPageComponent implements OnInit {
 
   products: Product[] = [];
   categories: Category[] = [];
-  addProductEnabled: boolean = false;
-  productEditId: number = -1;
+  addProductEnabled: boolean = true;
+  productEditIndex: number = -1;
 
   
   constructor(
@@ -44,30 +44,37 @@ export class ProductPageComponent implements OnInit {
   }
 
   addProduct(): void{
-    //product with id -1 acts as a new valueless product
-    if(this.products.length == 0 || this.products[this.products.length-1].id != -1){
-      var product: Product = {
-        id: -1,
-        title: "",
-        storage: 0,
-        categoryId: 0,
-        price: 0,
-        images: "",
-        category: {id: 0, title: ""}
-      };
-      this.products.push(product);
-      this.productEditId = -1;
-    } 
+    this.addProductEnabled = false;
+
+    var product: Product = {
+      id: 0,
+      title: "",
+      storage: 0,
+      categoryId: 0,
+      price: 0,
+      images: ""
+    };
+    this.products.push(product);
+    this.productEditIndex = this.products.length-1;
   }
 
-  editProduct(product: Product): void{
-    if(product.id == -1){
-      this.productService.addProduct(product);
-      
-    } else {
-      //update
+  openEditProduct(index: number){
+    this.productEditIndex = index;
+    this.addProductEnabled = false;
+  }
+
+  editProduct(product: Product, index: number): void{
+    var last_index = this.products.length-1;
+
+    if(this.products[index].id == 0){ //adds new product
+      this.productService.addProduct(product)
+        .subscribe( a => this.products[last_index] = a )
     }
-    this.products = this.products.filter(a => a != product);
-    this.productService.deleteProduct(product.id).subscribe()
+    else { //edits existing product
+      this.productService.updateProduct(this.products[this.productEditIndex].id, product)
+        .subscribe( a => this.products[this.productEditIndex] = a)
+    }
+    this.productEditIndex = -1;
+    this.addProductEnabled = true;
   }
 }
