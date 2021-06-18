@@ -4,8 +4,9 @@
         <a *ngFor="let category of categories">{{category.title}}</a>
     </div>
     <div class="products">
-        <div class="product" *ngFor="let product of products; let i = index" [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
-            <app-product-edit *ngIf="i == productEditIndex" (updateEvent)="editProduct($event, i)"></app-product-edit>
+        <div class="product" *ngFor="let product of products; let i = index"
+            [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
+            <app-product-edit *ngIf="i == productEditIndex" [product]="product" (updateEvent)="editProduct($event, i)"></app-product-edit>
             <div *ngIf="i !== productEditIndex">
                 <p>{{product.category.title}}</p>
                 <p>{{product.title}}</p>

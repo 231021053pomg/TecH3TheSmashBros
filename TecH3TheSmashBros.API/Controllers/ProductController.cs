@@ -74,12 +74,12 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
         [HttpPatch("products/{productsId}")]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, Product product)
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, [FromBody] Product product)
         {
             try
             {
-                var removed_product = await _productService.UpdateProduct(productsId, product);
-                return Ok(removed_product);
+                var updated_product = await _productService.UpdateProduct(productsId, product);
+                return Ok(updated_product);
             }
             catch (Exception ex)
             {

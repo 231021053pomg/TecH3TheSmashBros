@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Category } from 'src/app/model';
+import { Category, Product } from 'src/app/model';
 import { ProductService } from 'src/app/service/product.service';
 import { Output, EventEmitter } from '@angular/core';
 
@@ -10,9 +10,10 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
+  
   categories: Category[] = [];
-
+  
+  @Input() product : Product
   @Output() updateEvent = new EventEmitter<boolean>();
 
   constructor(
@@ -29,8 +30,15 @@ export class ProductEditComponent implements OnInit {
     images: "",
   });
 
+  productInitial: Product;
+
   ngOnInit(): void {
     this.getCategories();
+    this.productForm.controls['title'].setValue(this.product.title);
+    this.productForm.controls['price'].setValue(this.product.price);
+    this.productForm.controls['storage'].setValue(this.product.storage);
+    this.productForm.controls['categoryId'].setValue(this.product.categoryId);
+    this.productForm.controls['images'].setValue(this.product.images);
   }
 
   getCategories(): void {

@@ -15,22 +15,22 @@ export class ProductPageComponent implements OnInit {
   addProductEnabled: boolean = true;
   productEditIndex: number = -1;
 
-  
+
   constructor(
-    private productService : ProductService
-    ) { };
+    private productService: ProductService
+  ) { };
 
 
 
-  ngOnInit( ): void {
+  ngOnInit(): void {
     this.getProducts();
     this.getCategories();
   }
 
 
   getProducts(): void {
-      this.productService.getProducts()
-        .subscribe(product => this.products = product)
+    this.productService.getProducts()
+      .subscribe(product => this.products = product)
   }
 
   getCategories(): void {
@@ -38,12 +38,12 @@ export class ProductPageComponent implements OnInit {
       .subscribe(category => this.categories = category)
   }
 
-  deleteProduct(product: Product){
+  deleteProduct(product: Product) {
     this.products = this.products.filter(a => a != product);
     this.productService.deleteProduct(product.id).subscribe()
   }
 
-  addProduct(): void{
+  addProduct(): void {
     this.addProductEnabled = false;
 
     var product: Product = {
@@ -55,24 +55,24 @@ export class ProductPageComponent implements OnInit {
       images: ""
     };
     this.products.push(product);
-    this.productEditIndex = this.products.length-1;
+    this.productEditIndex = this.products.length - 1;
   }
 
-  openEditProduct(index: number){
+  openEditProduct(index: number) {
     this.productEditIndex = index;
     this.addProductEnabled = false;
   }
 
-  editProduct(product: Product, index: number): void{
-    var last_index = this.products.length-1;
+  editProduct(product: Product, index: number): void {
+    var last_index = this.products.length - 1;
 
-    if(this.products[index].id == 0){ //adds new product
+    if (this.products[index].id == 0) { //adds new product
       this.productService.addProduct(product)
-        .subscribe( a => this.products[last_index] = a )
+        .subscribe(a => this.products[last_index] = a)
     }
     else { //edits existing product
       this.productService.updateProduct(this.products[this.productEditIndex].id, product)
-        .subscribe( a => this.products[this.productEditIndex] = a)
+        .subscribe(a => this.products[this.productEditIndex] = a)
     }
     this.productEditIndex = -1;
     this.addProductEnabled = true;
