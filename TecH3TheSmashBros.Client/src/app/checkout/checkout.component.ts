@@ -12,14 +12,15 @@ export class CheckoutComponent implements OnInit {
   CartItems: CartItem[] = [];
 
   constructor(
-    private basketService : BasketService
+    private basketService: BasketService
   ) { }
 
   ngOnInit(): void {
-    
     this.CartItems = JSON.parse(localStorage.getItem('cart'));
-    console.log("Checkout",this.CartItems);
-
+    console.log("Checkout", this.CartItems);
+  }
+  openEditBasket(antal: number): void {
+    
   }
 
 }

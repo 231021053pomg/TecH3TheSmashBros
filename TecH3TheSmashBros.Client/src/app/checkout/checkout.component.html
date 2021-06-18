@@ -1,5 +1,6 @@
-<h1>Inkøbs Kurv</h1>
-{{CartItems}}
+<h1>Indkøbs Kurv</h1>
 <div *ngFor="let CartItem of CartItems">
-    <p>{{CartItem.navn}}</p>
+    <p>{{CartItem.navn}} {{CartItem.pris}} kr & du har {{CartItem.antal}} antal</p>
+    <a (click)="openEditBasket(CartItem.antal)" class="editBasket">Edit</a>
+    <a (click)="deleteBasket(CartItem)" class="deleteBasket">x</a>
 </div>

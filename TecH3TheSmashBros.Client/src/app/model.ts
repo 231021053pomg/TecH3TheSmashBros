@@ -15,5 +15,6 @@ export interface CartItem{
     productid : number,
     navn: string,
     pris: number,
-    antal: number
+    // storage: number,
+    antal: number,
 }
