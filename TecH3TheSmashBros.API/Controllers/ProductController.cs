@@ -60,12 +60,12 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpPost("products/{categoryId}")]
-        public async Task<IActionResult> CreateProduct([FromRoute] int categoryId, Product product)
+        [HttpPost("products")]
+        public async Task<IActionResult> CreateProduct(Product product)
         {
             try
             {
-                var new_product = await _productService.CreateProduct(product, categoryId);
+                var new_product = await _productService.CreateProduct(product);
                 return Ok(new_product);
             }
             catch (Exception ex)
@@ -73,12 +73,12 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpPatch("products/{productsId}/{categoryId}")]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, [FromRoute] int categoryId, Product product)
+        [HttpPatch("products/{productsId}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, Product product)
         {
             try
             {
-                var removed_product = await _productService.UpdateProduct(productsId, product, categoryId);
+                var removed_product = await _productService.UpdateProduct(productsId, product);
                 return Ok(removed_product);
             }
             catch (Exception ex)

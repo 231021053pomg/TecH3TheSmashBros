@@ -1,0 +1,35 @@
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+    <div>
+        <label for="product-title">
+          Title
+        </label>
+        <input class="form-control" id="product-title" type="text" placeholder="Name" formControlName="title">
+    </div>
+    <div>
+        <label for="product-price">
+          Price
+        </label>
+        <input class="form-control" id="product-price" type="number" value=99 formControlName="price">
+    </div>
+    <div>
+        <label for="product-storage">
+          Storage
+        </label>
+        <input class="form-control" id="product-storage" type="number" value=5 formControlName="storage">
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="product-categoryId">CategoryId</label>
+            <select class="form-control" id="product-categoryId" formControlName="categoryId">
+                <option *ngFor="let category of categories" value={{category.id}}>{{category.title}}</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <label for="product-images">
+          Images
+        </label>
+        <input class="form-control" id="product-images" type="text" placeholder="image_of_character.jpg" formControlName="images">
+    </div>
+    <button class="mt-2 btn btn-primary" type="submit">Save</button>
+</form>

@@ -33,16 +33,14 @@ namespace TecH3TheSmashBros.API.Services
             return _productRepository.GetProductById(id);
         }
 
-        public Task<Product> CreateProduct(Product product, int categoryId)
+        public Task<Product> CreateProduct(Product product)
         {
-            product.CategoryId = categoryId;
-            product.Category = _categoryRepository.GetCategoryById(categoryId).Result;
+            product.Category = _categoryRepository.GetCategoryById(product.CategoryId).Result;
             return _productRepository.CreateProduct(product);
         }
 
-        public Task<Product> UpdateProduct(int id, Product product, int categoryId)
+        public Task<Product> UpdateProduct(int id, Product product)
         {
-            product.CategoryId = categoryId;
             return _productRepository.UpdateProduct(id, product);
         }
 
