@@ -14,22 +14,16 @@ import { ProductService } from '../service/product.service';
 export class ProductPageComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
-  addProductEnabled: boolean = false;
+  addProductEnabled: boolean = true;
+  productEditIndex: number = -1;
 
-  productForm = this.formBuilder.group({
-    title: "",
-    price: 0,
-    storage: 0,
-    categoryId: 1,
-    images: "",
-  });
-
+  
   constructor(
     private productService : ProductService,
     private formBuilder: FormBuilder,
     private basketService : BasketService
+  ) {}
 
-  ) { }
 
   ngOnInit( ): void {
     this.getProducts();
@@ -53,14 +47,39 @@ export class ProductPageComponent implements OnInit {
     this.productService.deleteProduct(product.id).subscribe()
   }
 
-  addProduct(): void {
-    console.warn('Your order has been submitted', this.productForm.value);
-    this.productForm.reset();
+  addProduct(): void{
+    this.addProductEnabled = false;
+
+    var product: Product = {
+      id: 0,
+      title: "",
+      storage: 0,
+      categoryId: 0,
+      price: 0,
+      images: ""
+    };
+    this.products.push(product);
+    this.productEditIndex = this.products.length-1;
   }
 
-  addProductToggle(): void{
-    if (this.addProductEnabled) this.addProductEnabled = false;
-    else this.addProductEnabled = true;
+  openEditProduct(index: number){
+    this.productEditIndex = index;
+    this.addProductEnabled = false;
+  }
+
+  editProduct(product: Product, index: number): void{
+    var last_index = this.products.length-1;
+
+    if(this.products[index].id == 0){ //adds new product
+      this.productService.addProduct(product)
+        .subscribe( a => this.products[last_index] = a )
+    }
+    else { //edits existing product
+      this.productService.updateProduct(this.products[this.productEditIndex].id, product)
+        .subscribe( a => this.products[this.productEditIndex] = a)
+    }
+    this.productEditIndex = -1;
+    this.addProductEnabled = true;
   }
   // buyProduct(product): void{
   //   var cart = []

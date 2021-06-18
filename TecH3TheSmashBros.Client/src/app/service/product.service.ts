@@ -31,6 +31,18 @@ export class ProductService {
     )
   }
 
+  updateProduct(id: number, product: Product): Observable<Product>{
+    return this.http.patch<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
+      catchError(this.handleError<Product>("updateProduct"))
+    )
+  }
+
+  addProduct(product: Product): Observable<Product>{
+    return this.http.post<Product>(`${this.apiUrl}products`,product,this.httpOptions).pipe(
+      catchError(this.handleError<Product>("addProduct"))
+    )
+  }
+
   getCategories(): Observable<Category[]>{
     return this.http.get<Category[]>(`${this.apiUrl}categories`).pipe(
       catchError(this.handleError<Category[]>("getCategories"))
