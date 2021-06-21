@@ -1,3 +1,4 @@
+
 export interface Product{
     id: number,
     title: string,
@@ -10,4 +11,11 @@ export interface Product{
 export interface Category{
     id: number;
     title: string;
+}
+
+export interface User{
+    email: Email;
+    password: Password;
+    roleId: RoleId;
+    customer: Customer;
 }

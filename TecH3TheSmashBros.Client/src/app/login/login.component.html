@@ -1,6 +1,19 @@
 <div class="loginContainer">
     <div class="loginButton">
-        <button  class="theButton">Login</button>
+        <button (click)="onClick()" class="theButton">Login</button>
     </div>
-    
-</div>
+
+</div>    
+<div class="loginBox" *ngIf="isClicked">
+    <div>
+        Email:
+        <input class="loginInputBox" authorId="authorId" >
+    </div>
+    <div>
+        Password:
+        <input class="loginInputBox" published="published">
+    </div>
+
+</div>    
+
+
