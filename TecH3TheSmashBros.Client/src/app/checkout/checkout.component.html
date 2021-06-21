@@ -1,6 +1,7 @@
 <h1>Indkøbs Kurv</h1>
 <div *ngFor="let CartItem of CartItems">
-    <p>{{CartItem.navn}} {{CartItem.pris}} kr & du har {{CartItem.antal}} antal</p>
-    <a (click)="openEditBasket(CartItem.antal)" class="editBasket">Edit</a>
-    <a (click)="deleteBasket(CartItem)" class="deleteBasket">x</a>
+    <p>{{CartItem.navn}} {{CartItem.pris}} kr & du har </p>
+    <input type="text" value="{{CartItem.antal}}" #antal> 
+    <a (click)="editbasket(CartItem.productid, antal.value)" class="buy">Update</a>
+    <a (click)="deleteBasket(CartItem.productid)" class="deleteBasket">[X] </a>
 </div>

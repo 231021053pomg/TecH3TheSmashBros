@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../model';
+import { Product } from '../module';
 import { BasketService } from '../service/basket.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { BasketService } from '../service/basket.service';
 })
 export class CheckoutComponent implements OnInit {
 
+  products: Product[] = [];
   CartItems: CartItem[] = [];
 
   constructor(
@@ -19,8 +21,13 @@ export class CheckoutComponent implements OnInit {
     this.CartItems = JSON.parse(localStorage.getItem('cart'));
     console.log("Checkout", this.CartItems);
   }
-  openEditBasket(antal: number): void {
-    
+  editbasket(id: number, antal: number): void {
+    this.basketService.editbasket(id, antal);
+    this.CartItems = JSON.parse(localStorage.getItem('cart'));
   }
-
+  deleteBasket(id: number): void {
+    console.log("DeleteBasket",id);
+    this.basketService.removefrombasket(id);
+    this.CartItems = JSON.parse(localStorage.getItem('cart'));
+  }
 }

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { asNativeElements, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ObserveOnSubscriber } from 'rxjs/internal/operators/observeOn';
 import { Category, Product } from '../model';
@@ -62,8 +62,32 @@ export class BasketService {
   SaveBasket(): void {
     localStorage.setItem('cart', JSON.stringify(this.Cart));
   }
-  getBasket() :CartItem[]{
+  getBasket(): CartItem[] {
     return this.Cart;
+  }
+  editbasket(id: number, antal: number): void {
+    this.createbasket();
+    this.Cart.forEach(function (item) {
+      if (item.productid == id) {
+        item.antal = antal;
+      }
+    });
+
+    this.SaveBasket()
+  }
+  removefrombasket(id: number): void {
+    this.createbasket();
+    console.log("BasketService før slet",this.Cart);
+    for(let i = this.Cart.length - 1; i >= 0; i--) {
+      if (this.Cart[i].productid == id) {
+        console.log("BasketService Imens den sletter",i)
+        this.Cart.splice(i, 1)
+      }
+    };
+    console.log("Efter den har slettede",this.Cart);
+    
+    this.SaveBasket();
+
   }
   // editBasket() : CartItem[]{
 
