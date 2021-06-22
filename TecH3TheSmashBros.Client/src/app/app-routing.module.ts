@@ -5,9 +5,9 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/CheckOut', component: CheckoutComponent},
-  {path: 'products/:id',component:ProductDetailComponent},
-  {path: 'products',component:ProductPageComponent},
+  /* { path: '', redirectTo: '/CheckOut', component: CheckoutComponent}, */
+  { path: 'products/:id',component:ProductDetailComponent},
+  { path: 'products',component:ProductPageComponent},
   { path: 'CheckOut', component:CheckoutComponent}
 ];
 

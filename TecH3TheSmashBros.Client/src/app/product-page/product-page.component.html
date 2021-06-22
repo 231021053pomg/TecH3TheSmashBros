@@ -4,10 +4,10 @@
             <a>All products</a>
         </div>
         <div *ngFor="let category of categories">
-            <div *ngIf="category.id == categoryEditIndex" class="input-group mb-3 mx-2">
+            <div *ngIf="category.id == categoryEditIndex" class="input-group mb-3 mx-2 w-auto">
                 <input type="text" #CategoryEditId class="form-control" value="{{category.title}}" aria-label="Recipient's username">
                 <div class="input-group-append">
-                  <button (click)="editCategory(category )" class="btn btn-outline-secondary" type="button">Save</button>
+                  <button (click)="editCategory(category)" class="btn btn-outline-secondary" type="button">Save</button>
                 </div>
             </div>
             <div *ngIf="category.id != categoryEditIndex">
