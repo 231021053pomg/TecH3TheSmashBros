@@ -7,15 +7,41 @@
 <div class="loginBox" userId="userId">
     <div>
         Email:
+        <br>
         <input class="loginInputBox" #email >
     </div>
     <div>
         Password:
+        <br>
         <input class="loginInputBox" #password>
     </div>
     <button (click)="getUser()">Login</button>
 
-    <button (click)="addUser(email,password)">Create</button>
+    <button (click)="createClick()">Create</button>
+
+    <div *ngIf="createClicked"class="createUserCustomer">
+        Firstname:
+        <br>
+        <input class="customerInputBox" #firstname>
+        <br>
+        Lastname:
+        <br>
+        <input class="customerInputBox" #lastname>
+        <br>
+        Street:
+        <br>
+        <input class="customerInputBox" #street>
+        <br>
+        Zipcode:
+        <br>
+        <input class="customerInputBox" #zipcode>
+        <br>
+        City:
+        <br>
+        <input class="customerInputBox" #city>
+        <br>
+        <button>Finalize</button>
+    </div>
 </div>    
 <div id="userBox">
 
