@@ -34,7 +34,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
 
-        [HttpGet("products/{categoryId}")]
+        [HttpGet("products/by_category/{categoryId}")]
         public async Task<IActionResult> GetAllProductsByCategory([FromRoute] int categoryId)
         {
             try

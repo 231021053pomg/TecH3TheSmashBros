@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { CartItem, Category, Product } from '../model';
 import { BasketService } from '../service/basket.service';
 import { ProductService } from '../service/product.service';
@@ -24,13 +23,10 @@ export class ProductPageComponent implements OnInit {
     private basketService : BasketService
   ) {}
 
-
   ngOnInit(): void {
     this.getProducts();
     this.getCategories();
   }
-  
-
 
   getProducts(): void {
     this.productService.getProducts()
@@ -55,6 +51,10 @@ export class ProductPageComponent implements OnInit {
       title: "",
       storage: 0,
       categoryId: 0,
+      category: {
+        id: 0,
+        title: "",
+      },
       price: 0,
       images: ""
     };

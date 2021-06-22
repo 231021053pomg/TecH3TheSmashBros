@@ -12,7 +12,18 @@ import { ProductService } from 'src/app/service/product.service';
 export class ProductDetailComponent implements OnInit {
 
   id : number = 0;
-  product: Product;
+  product: Product = {
+    id: 0,
+    title: "",
+    storage: 0,
+    categoryId: 0,
+    category: {
+      id: 0,
+      title: ""
+    },
+    price: 0,
+    images: ""
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +37,14 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct(): void {
     this.id = (this.route.snapshot.paramMap.get('id') || 0) as number;
+    console.log(this.id);
     this.productService.getProduct(this.id).subscribe(
       product => {
         this.product = product;
-      });
-    if (this.product == null) {
-      this.location.go("/products")
-    }
+        if (this.product == null) {
+          this.location.go("/products")
+        }
+      }
+    )
   }
-
 }
