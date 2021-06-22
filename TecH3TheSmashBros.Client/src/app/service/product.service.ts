@@ -25,6 +25,12 @@ export class ProductService {
     )
   }
 
+  getProduct(id: number): Observable<Product>{
+    return this.http.get<Product>(`${this.apiUrl}product/${id}`).pipe(
+      catchError(this.handleError<Product>("getProductById"))
+    )
+  }
+
   deleteProduct(id: number): Observable<Product>{
     return this.http.delete<Product>(`${this.apiUrl}products/${id}`).pipe(
       catchError(this.handleError<Product>("deleteProduct"))
