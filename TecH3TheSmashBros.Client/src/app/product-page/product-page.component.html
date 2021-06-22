@@ -1,7 +1,17 @@
 <div class="d-flex">
     <div class="categories">
-        <a>All products</a>
-        <a *ngFor="let category of categories">{{category.title}}</a>
+        <div>
+            <a>All products</a>
+        </div>
+        <div *ngFor="let category of categories">
+            <a>{{category.title}}</a>
+            <a class="float-end me-2" (click)="deleteCategory(category)">x</a>
+        </div>
+        <div>
+            <input class="form-control mx-2 w-auto" id="category-input" #categoryPrice>
+            <button class="mt-2 ms-2 btn btn-primary" (click)="addCategory(categoryPrice.value)">Add Category</button>
+        </div>
+        
     </div>
     <div class="products">
         <div class="product" *ngFor="let product of products; let i = index"

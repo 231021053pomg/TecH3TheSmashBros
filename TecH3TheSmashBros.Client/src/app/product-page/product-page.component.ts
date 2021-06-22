@@ -67,14 +67,42 @@ export class ProductPageComponent implements OnInit {
     var last_index = this.products.length - 1;
 
     if (this.products[index].id == 0) { //adds new product
+      console.log("add")
       this.productService.addProduct(product)
         .subscribe(a => this.products[last_index] = a)
     }
     else { //edits existing product
+      console.log("edit")
       this.productService.updateProduct(this.products[this.productEditIndex].id, product)
         .subscribe(a => this.products[this.productEditIndex] = a)
     }
     this.productEditIndex = -1;
     this.addProductEnabled = true;
+  }
+
+  addCategory(title: string) {
+    this.productService.addCategory(title)
+      .subscribe(a => this.categories.push(a));
+
+    var input = document.getElementById("category-input") as HTMLInputElement;
+    input.value = "";
+  }
+
+  deleteCategory(category: Category) {
+    var id = category.id;
+    var found = false;
+    for (var i = 0; i < this.products.length; i++) {
+      if (this.products[i].categoryId == id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found){
+      alert(`can't delete ${category.title} while it's referenced by products`)
+    } else {
+      this.productService.deleteCategory(id);
+      this.categories = this.categories.filter(a => a != category);
+    }
   }
 }

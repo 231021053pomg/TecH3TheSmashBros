@@ -32,14 +32,12 @@ export class ProductService {
   }
 
   updateProduct(id: number, product: Product): Observable<Product>{
-    console.log("update")
     return this.http.patch<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("updateProduct"))
     )
   }
 
   addProduct(product: Product): Observable<Product>{
-    console.log("create")
     return this.http.post<Product>(`${this.apiUrl}products`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("addProduct"))
     )
@@ -48,6 +46,18 @@ export class ProductService {
   getCategories(): Observable<Category[]>{
     return this.http.get<Category[]>(`${this.apiUrl}categories`).pipe(
       catchError(this.handleError<Category[]>("getCategories"))
+    )
+  }
+
+  addCategory(categoryTitle: string): Observable<Category>{
+    return this.http.post<Category>(`${this.apiUrl}categories?categoryTitle=${categoryTitle}`, this.httpOptions).pipe(
+      catchError(this.handleError<Product>("addCategory"))
+    )
+  }
+
+  deleteCategory(categoryId: number): Observable<Category>{
+    return this.http.delete<Category>(`${this.apiUrl}categories/${categoryId}`).pipe(
+      catchError(this.handleError<Product>("deleteCategory"))
     )
   }
 

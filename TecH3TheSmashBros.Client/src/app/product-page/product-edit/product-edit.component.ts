@@ -44,6 +44,7 @@ export class ProductEditComponent implements OnInit {
   getCategories(): void {
     this.productService.getCategories()
       .subscribe(category => this.categories = category)
+    console.log(this.categories);
   }
 
   editProduct(): void {
