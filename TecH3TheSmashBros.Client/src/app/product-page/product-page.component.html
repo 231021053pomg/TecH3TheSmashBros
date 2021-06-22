@@ -13,6 +13,7 @@
                 <p>Price: {{product.price}}</p>
                 <a (click)="openEditProduct(i)" class="edit">Edit</a>
                 <a (click)="deleteProduct(product)" class="delete">x</a>
+                <a (click)="AddBasket(product)" class="buy">Buy</a>
             </div>
         </div>
         <div *ngIf="addProductEnabled === true" class="product add-product">

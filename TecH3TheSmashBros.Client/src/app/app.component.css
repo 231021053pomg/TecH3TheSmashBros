@@ -1,0 +1,22 @@
+.Menu
+{
+    text-align: center;
+    font-family: 'Bebas Neue';
+    font-size: 150%;
+}
+.start
+{
+    text-align: center;
+    font-size: 150%;
+}
+.Login
+{    
+    float:right;
+    text-align: center;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: blue;
+}

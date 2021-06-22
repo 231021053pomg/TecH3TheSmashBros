@@ -66,7 +66,7 @@ namespace TecH3TheSmashBros.API.Controllers
             {
                 if (order == null)
                 {
-                    return BadRequest("Author Fail.....");
+                    return BadRequest("Order Fail.....");
                 }
                 var neworder = await _orderService.Create(order);
 
