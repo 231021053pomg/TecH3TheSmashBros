@@ -1,3 +1,4 @@
+import * as internal from "stream";
 
 export interface Product{
     id: number,
@@ -14,8 +15,15 @@ export interface Category{
 }
 
 export interface User{
-    email: Email;
-    password: Password;
-    roleId: RoleId;
-    customer: Customer;
+    email: string,
+    password: string,
+    roleId: number
+}
+
+export interface CartItem{
+    productid : number,
+    navn: string,
+    pris: number,
+    // storage: number,
+    antal: number,
 }
