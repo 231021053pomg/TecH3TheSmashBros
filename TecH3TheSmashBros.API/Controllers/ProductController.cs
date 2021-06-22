@@ -73,7 +73,7 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpPatch("products/{productsId}")]
+        [HttpPut("products/{productsId}")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, [FromBody] Product product)
         {
             try

@@ -43,8 +43,11 @@ export class ProductEditComponent implements OnInit {
 
   getCategories(): void {
     this.productService.getCategories()
-      .subscribe(category => this.categories = category)
-    console.log(this.categories);
+      .subscribe(category => {
+        this.categories = category;
+        console.log(this.categories)
+      }
+    )
   }
 
   editProduct(): void {
@@ -54,6 +57,8 @@ export class ProductEditComponent implements OnInit {
 
   submit(): void {
     var product = this.productForm.value;
+    product.categoryId = parseInt(product.categoryId);
+    console.log(product)
     this.updateEvent.emit(product);
   }
 }

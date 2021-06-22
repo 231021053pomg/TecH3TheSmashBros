@@ -4,8 +4,17 @@
             <a>All products</a>
         </div>
         <div *ngFor="let category of categories">
-            <a>{{category.title}}</a>
-            <a class="float-end me-2" (click)="deleteCategory(category)">x</a>
+            <div *ngIf="category.id == categoryEditIndex" class="input-group mb-3 mx-2">
+                <input type="text" #CategoryEditId class="form-control" value="{{category.title}}" aria-label="Recipient's username">
+                <div class="input-group-append">
+                  <button (click)="editCategory(category )" class="btn btn-outline-secondary" type="button">Save</button>
+                </div>
+            </div>
+            <div *ngIf="category.id != categoryEditIndex">
+                <a>{{category.title}}</a>
+                <a class="float-end me-2" (click)="deleteCategory(category)">x</a>
+                <a class="float-end me-2" (click)="openEditCategory(category)">e</a>
+            </div>
         </div>
         <div>
             <input class="form-control mx-2 w-auto" id="category-input" #categoryPrice>

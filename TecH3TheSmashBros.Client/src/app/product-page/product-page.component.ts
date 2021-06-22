@@ -14,6 +14,7 @@ export class ProductPageComponent implements OnInit {
   categories: Category[] = [];
   addProductEnabled: boolean = true;
   productEditIndex: number = -1;
+  categoryEditIndex: number = -1;
 
 
   constructor(
@@ -67,12 +68,10 @@ export class ProductPageComponent implements OnInit {
     var last_index = this.products.length - 1;
 
     if (this.products[index].id == 0) { //adds new product
-      console.log("add")
       this.productService.addProduct(product)
         .subscribe(a => this.products[last_index] = a)
     }
     else { //edits existing product
-      console.log("edit")
       this.productService.updateProduct(this.products[this.productEditIndex].id, product)
         .subscribe(a => this.products[this.productEditIndex] = a)
     }
@@ -104,5 +103,13 @@ export class ProductPageComponent implements OnInit {
       this.productService.deleteCategory(id);
       this.categories = this.categories.filter(a => a != category);
     }
+  }
+
+  openEditCategory(category: Category) {
+    this.categoryEditIndex = category.id;
+  }
+
+  editCategory(category: Category){
+    this.categoryEditIndex = -1;
   }
 }

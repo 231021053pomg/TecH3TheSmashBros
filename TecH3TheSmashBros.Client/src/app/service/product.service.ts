@@ -32,12 +32,14 @@ export class ProductService {
   }
 
   updateProduct(id: number, product: Product): Observable<Product>{
-    return this.http.patch<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
+    console.log("update")
+    return this.http.put<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("updateProduct"))
     )
   }
 
   addProduct(product: Product): Observable<Product>{
+    console.log("create")
     return this.http.post<Product>(`${this.apiUrl}products`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("addProduct"))
     )
