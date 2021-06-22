@@ -1,4 +1,3 @@
-import * as internal from "stream";
 
 export interface Product{
     id: number,
@@ -15,6 +14,7 @@ export interface Category{
 }
 
 export interface User{
+    id: number,
     email: string,
     password: string,
     roleId: number

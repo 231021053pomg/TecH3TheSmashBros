@@ -3,17 +3,31 @@
         <button (click)="onClick()" class="theButton">Login</button>
     </div>
 
-</div>    
-<div class="loginBox" *ngIf="isClicked">
+</div> 
+<div class="loginBox" *ngIf="isClicked" userId="userId">
     <div>
         Email:
-        <input class="loginInputBox" authorId="authorId" >
+        <input class="loginInputBox" #email >
     </div>
     <div>
         Password:
-        <input class="loginInputBox" published="published">
+        <input class="loginInputBox" #password>
     </div>
+    <button (click)="
+    addUser(email.value, password.value);
+    email.value = '';
+    password.value = '';
+    ">Save</button>
 
 </div>    
-
+<div id="userBox">
+    
+    <li>
+        <a>{{User.email}}, UserID: {{User.id}} </a> 
+        
+    </li>
+    <div *ngIf="createClicked">
+        
+    </div>
+</div>
 

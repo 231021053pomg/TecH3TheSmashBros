@@ -9,7 +9,7 @@ import { User } from '../model';
   })
 
   export class LoginService {
-    apiUrl: string = "https://localhost:5001/api/";
+    apiUrl: string = "https://localhost:5001/api/Login";
   
     httpOptions = {
       headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
