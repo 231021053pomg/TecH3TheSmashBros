@@ -1,3 +1,4 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 
 export interface Product{
     id: number,
@@ -17,7 +18,15 @@ export interface User{
     id: number,
     email: string,
     password: string,
-    roleId: number
+    roleId: number,
+    custommer: Customer
+}
+export interface Customer{
+    firstname: string,
+    lastname: String,
+    street: string,
+    zipcode: string,
+    city: string
 }
 
 export interface CartItem{

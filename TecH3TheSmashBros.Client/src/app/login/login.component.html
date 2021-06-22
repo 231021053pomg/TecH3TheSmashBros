@@ -1,10 +1,10 @@
-<div class="loginContainer">
+<!-- <div class="loginContainer">
     <div class="loginButton">
         <button (click)="onClick()" class="theButton">Login</button>
     </div>
 
-</div> 
-<div class="loginBox" *ngIf="isClicked" userId="userId">
+</div>  -->
+<div class="loginBox" userId="userId">
     <div>
         Email:
         <input class="loginInputBox" #email >
@@ -13,21 +13,16 @@
         Password:
         <input class="loginInputBox" #password>
     </div>
-    <button (click)="
-    addUser(email.value, password.value);
-    email.value = '';
-    password.value = '';
-    ">Save</button>
+    <button (click)="getUser()">Login</button>
 
+    <button (click)="addUser(email,password)">Create</button>
 </div>    
 <div id="userBox">
+
+
+    <p>[X]</p>
+     
+        
     
-    <li>
-        <a>{{User.email}}, UserID: {{User.id}} </a> 
-        
-    </li>
-    <div *ngIf="createClicked">
-        
-    </div>
 </div>
 

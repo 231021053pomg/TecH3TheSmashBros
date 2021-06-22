@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../model';
+import { User, Customer } from '../model';
 
 import { LoginService } from '../service/login.service'
 
@@ -10,7 +10,8 @@ import { LoginService } from '../service/login.service'
 })
 export class LoginComponent implements OnInit {
 
-  Logins: User[] = [];
+  Users: User[] = [];
+  
 
   constructor(
     private loginService : LoginService
@@ -22,23 +23,22 @@ export class LoginComponent implements OnInit {
   createClick(){this.createClicked=true;}
 
   ngOnInit(): void {
-    
   }
 
   getUser():void{
     this.loginService.getUser()
-    .subscribe(Logins => this.Logins = Logins);
+    .subscribe(user => this.Users = user);
     
   }
   addUser(email:any, password:any):void{
-    let Logins = {email, password} as User;
-    this.loginService.addUser(Logins)
-    .subscribe(Login => {this.Logins.push(Login)});
+    this.loginService.addUser({email, password} as User)
+    .subscribe(user => {this.Users.push(user)});
+    
   }
-  deleteUser(Logins:User):void{
-    if(confirm(`Are you sure you want to delete:  ${Logins.email}`)){
-      this.Logins = this.Logins.filter(a => a !== Logins);
-      this.loginService.deleteUser(Logins.id).subscribe();
+  deleteUser(user:User):void{
+    if(confirm(`Are you sure you want to delete:  ${user.email}`)){
+      this.Users = this.Users.filter(a => a !== user);
+      this.loginService.deleteUser(user.id).subscribe();
     }
     
   }

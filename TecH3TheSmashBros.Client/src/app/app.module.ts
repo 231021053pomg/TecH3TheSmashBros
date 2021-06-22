@@ -21,7 +21,7 @@ import { LoginComponent } from './login/login.component';
     ProductEditComponent,
     LoginComponent,
     CheckoutComponent,
-    ProductEditComponent
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
