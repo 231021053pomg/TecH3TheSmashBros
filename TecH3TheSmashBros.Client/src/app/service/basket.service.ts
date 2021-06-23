@@ -13,20 +13,20 @@ import { ɵInternalFormsSharedModule } from '@angular/forms';
   providedIn: 'root'
 })
 export class BasketService {
-  apiUrl: string = "https://localhost:5001/api/";
-  Cart: CartItem[] = [];
+  apiUrl: string = "https://localhost:5001/api/"; // api kaldet
+  Cart: CartItem[] = []; // laver et array af CartItems og kalder den Cart 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }) // Den body jeg sender til databasen bliver tolket som JSON
   }
   constructor(
     private http: HttpClient
   ) { }
   ngOnInit(): void {
-
+    // Den læser det som det første
   }
 
   createbasket(): void {
-    let cart = localStorage.getItem('cart')
+    let cart = localStorage.getItem('cart') 
     if (cart == null || cart == 'null')  {
       this.Cart = [];
       console.log("LOCALSTORAGE NULL", JSON.parse(localStorage.getItem('cart')));
@@ -34,7 +34,6 @@ export class BasketService {
       console.log('Pushed first Item: ', this.Cart);
     }
     else {
-
       this.Cart = JSON.parse(localStorage.getItem('cart'));
       console.log("LOCAL STORAGE HAS ITEMS", JSON.parse(localStorage.getItem('cart')));
       localStorage.setItem('cart', JSON.stringify(this.Cart));
@@ -108,7 +107,6 @@ export class BasketService {
       tap(_ => {localStorage.setItem('cart',null)}),
       catchError(this.handleError<CartItem[]>("addOrder"))
     );
-        
   }
   // editBasket() : CartItem[]{
 
