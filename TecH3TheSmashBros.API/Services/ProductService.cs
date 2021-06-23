@@ -68,5 +68,9 @@ namespace TecH3TheSmashBros.API.Services
         {
             return _categoryRepository.DeleteCatagory(id);
         }
+        public Task<Category> UpdateCategory(int id, Category category)
+        {
+            return _categoryRepository.UpdateCategory(id, category);
+        }
     }
 }
