@@ -15,11 +15,11 @@ export interface Category{
 }
 
 export interface User{
-    id: number,
+    id?: number,
     email: string,
     password: string,
-    roleId: number,
-    custommer: Customer
+    roleId?: number,
+    customer: Array<Customer>
 }
 export interface Customer{
     firstname: string,

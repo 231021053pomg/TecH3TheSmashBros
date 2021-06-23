@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from '../model';
+import { User, Customer } from '../model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,22 @@ export class LoginService {
 
   constructor(
     private http: HttpClient
-  ) { }
 
-  getUser(): Observable<User[]> {
+  ) { }
+  ngOnInit(): void {
+    this.getUsers();
+
+  }
+
+  getUser(id: number): Observable<User>{
+    return this.http.get<User>(`${this.apiUrl}user/${id}`).pipe(
+      catchError(this.handleError<User>("getUser"))
+    )
+  }
+
+  getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl + "user").pipe(
-      catchError(this.handleError<User[]>("getUser"))
+      catchError(this.handleError<User[]>("getUsers"))
     )
   }
 
@@ -32,20 +43,22 @@ export class LoginService {
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    return this.http.patch<User>(`${this.apiUrl}user/${id}`, user, this.httpOptions).pipe(
+    return this.http.put<User>(`${this.apiUrl}user/${id}`, user, this.httpOptions).pipe(
       catchError(this.handleError<User>("updateUser"))
     )
   }
 
   addUser(user: User): Observable<User> {
+    console.log(user);
     return this.http.post<User>(`${this.apiUrl}user/`, user, this.httpOptions).pipe(
       catchError(this.handleError<User>("addUser"))
-      );
-      
-    }
-    
-    
-    
+    );
+
+  }
+  
+
+
+
   /**
     * Handle Http operation that failed.
     * Let the app continue.
