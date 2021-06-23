@@ -8,13 +8,13 @@
     text-decoration: none;
     font-size: 25px;
     color: #818181;
-    display: block;
     width: inherit;
+    display: inline-block;
+    cursor: pointer;
 }
 
 .categories a:hover {
     color: white;
-    margin-left: 5px;
 }
 
 .products {
@@ -35,11 +35,11 @@
     border-width: 1px;
     border-color: #222;
     padding: 10px;
-    transition: background-size 2s ease-in;
+    transition: transform 50ms ease-in-out;
 }
 
 .product:hover{
-    background-size: 140%
+    transform: scale(0.98);
 }
 
 .product p{

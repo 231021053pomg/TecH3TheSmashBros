@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { CartItem, Category, Product } from '../model';
 import { BasketService } from '../service/basket.service';
 import { ProductService } from '../service/product.service';
@@ -14,25 +13,22 @@ export class ProductPageComponent implements OnInit {
   categories: Category[] = [];
   addProductEnabled: boolean = true;
   productEditIndex: number = -1;
+  categoryEditIndex: number = -1;
 
-  
+
   constructor(
-    private productService : ProductService,
-    private formBuilder: FormBuilder,
+    private productService: ProductService,
     private basketService : BasketService
   ) {}
 
-
-  ngOnInit( ): void {
+  ngOnInit(): void {
     this.getProducts();
     this.getCategories();
   }
-  
-
 
   getProducts(): void {
-      this.productService.getProducts()
-        .subscribe(product => this.products = product)
+    this.productService.getProducts()
+      .subscribe(product => this.products = product)
   }
 
   getCategories(): void {
@@ -40,12 +36,12 @@ export class ProductPageComponent implements OnInit {
       .subscribe(category => this.categories = category)
   }
 
-  deleteProduct(product: Product){
+  deleteProduct(product: Product) {
     this.products = this.products.filter(a => a != product);
     this.productService.deleteProduct(product.id).subscribe()
   }
 
-  addProduct(): void{
+  addProduct(): void {
     this.addProductEnabled = false;
 
     var product: Product = {
@@ -53,32 +49,71 @@ export class ProductPageComponent implements OnInit {
       title: "",
       storage: 0,
       categoryId: 0,
+      category: {
+        id: 0,
+        title: "",
+      },
       price: 0,
       images: ""
     };
     this.products.push(product);
-    this.productEditIndex = this.products.length-1;
+    this.productEditIndex = this.products.length - 1;
   }
 
-  openEditProduct(index: number){
+  openEditProduct(index: number) {
     this.productEditIndex = index;
     this.addProductEnabled = false;
   }
 
-  editProduct(product: Product, index: number): void{
-    var last_index = this.products.length-1;
+  editProduct(product: Product, index: number): void {
+    var last_index = this.products.length - 1;
 
-    if(this.products[index].id == 0){ //adds new product
+    if (this.products[index].id == 0) { //adds new product
       this.productService.addProduct(product)
-        .subscribe( a => this.products[last_index] = a )
+        .subscribe(a => this.products[last_index] = a)
     }
     else { //edits existing product
       this.productService.updateProduct(this.products[this.productEditIndex].id, product)
-        .subscribe( a => this.products[this.productEditIndex] = a)
+        .subscribe(a => this.products[this.productEditIndex] = a)
     }
     this.productEditIndex = -1;
     this.addProductEnabled = true;
   }
+
+  addCategory(title: string) {
+    this.productService.addCategory(title)
+      .subscribe(a => this.categories.push(a));
+
+    var input = document.getElementById("category-input") as HTMLInputElement;
+    input.value = "";
+  }
+
+  deleteCategory(category: Category) {
+    var id = category.id;
+    var found = false;
+    for (var i = 0; i < this.products.length; i++) {
+      if (this.products[i].categoryId == id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found){
+      alert(`can't delete ${category.title} while it's referenced by products`)
+    } else {
+      this.productService.deleteCategory(id);
+      this.categories = this.categories.filter(a => a != category);
+    }
+  }
+
+  openEditCategory(category: Category) {
+    this.categoryEditIndex = category.id;
+  }
+
+  editCategory(category: Category){
+    this.categoryEditIndex = -1;
+  }
+  
   // buyProduct(product): void{
   //   var cart = []
   //   cart.push({ product.id, })
