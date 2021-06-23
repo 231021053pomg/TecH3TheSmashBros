@@ -79,7 +79,7 @@ namespace TecH3TheSmashBros.Tests.Services
                 .Setup(x => x.CreateProduct(It.IsAny<Product>()))
                 .ReturnsAsync(() => new Product());
             //action
-            var product = await productService.CreateProduct(new Product(),1);
+            var product = await productService.CreateProduct(new Product());
 
             //assert
             Assert.NotNull(product);
@@ -92,7 +92,7 @@ namespace TecH3TheSmashBros.Tests.Services
                 .Setup(x => x.UpdateProduct(It.IsAny<int>(), It.IsAny<Product>()))
                 .ReturnsAsync(() => new Product());
             //action
-            var product = await productService.UpdateProduct(0, new Product(), 1);
+            var product = await productService.UpdateProduct(0, new Product());
             //assert
             Assert.NotNull(product);
         }

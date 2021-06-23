@@ -1,11 +1,31 @@
 <div class="d-flex">
     <div class="categories">
-        <a>All products</a>
-        <a *ngFor="let category of categories">{{category.title}}</a>
+        <div>
+            <a>All products</a>
+        </div>
+        <div *ngFor="let category of categories">
+            <div *ngIf="category.id == categoryEditIndex" class="input-group mb-3 mx-2 w-auto">
+                <input type="text" #CategoryEditId class="form-control" value="{{category.title}}" aria-label="Recipient's username">
+                <div class="input-group-append">
+                  <button (click)="editCategory(category)" class="btn btn-outline-secondary" type="button">Save</button>
+                </div>
+            </div>
+            <div *ngIf="category.id != categoryEditIndex">
+                <a>{{category.title}}</a>
+                <a class="float-end me-2" (click)="deleteCategory(category)">x</a>
+                <a class="float-end me-2" (click)="openEditCategory(category)">e</a>
+            </div>
+        </div>
+        <div>
+            <input class="form-control mx-2 w-auto" id="category-input" #categoryPrice>
+            <button class="mt-2 ms-2 btn btn-primary" (click)="addCategory(categoryPrice.value)">Add Category</button>
+        </div>
+        
     </div>
     <div class="products">
-        <div class="product" *ngFor="let product of products; let i = index" [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
-            <app-product-edit *ngIf="i == productEditIndex" (updateEvent)="editProduct($event, i)"></app-product-edit>
+        <div class="product" *ngFor="let product of products; let i = index"
+            [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
+            <app-product-edit *ngIf="i == productEditIndex" [product]="product" (updateEvent)="editProduct($event, i)"></app-product-edit>
             <div *ngIf="i !== productEditIndex">
                 <p>{{product.category.title}}</p>
                 <p>{{product.title}}</p>
@@ -14,6 +34,7 @@
                 <a (click)="openEditProduct(i)" class="edit">Edit</a>
                 <a (click)="deleteProduct(product)" class="delete">x</a>
                 <a (click)="AddBasket(product)" class="buy">Buy</a>
+                <a routerLink="{{product.id}}">Details</a>
             </div>
         </div>
         <div *ngIf="addProductEnabled === true" class="product add-product">
