@@ -25,18 +25,30 @@
 
 .product {
     height: 30em;
-    background-color: #111;
-    background-size: cover;
-    background-position: center;
     justify-content: center;
     width: 20em;
     position: relative;
     padding: 10px;
-    transition: transform 50ms ease-in-out;
+    overflow: hidden;
+    transition: transform 20ms ease-in-out;
+}
+
+.product img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: transform 75ms ease-in-out;
+    height: inherit;
 }
 
 .product:hover{
-    transform: scale(0.98);
+    transform: scale(1.01);
+}
+
+.product:hover img{
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .product p{
