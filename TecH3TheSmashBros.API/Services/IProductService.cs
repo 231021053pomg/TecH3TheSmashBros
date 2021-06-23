@@ -27,5 +27,7 @@ namespace TecH3TheSmashBros.API.Services
         Task<Category> CreateCategory(Category category);
 
         Task<Category> DeleteCategory(int id);
+
+        Task<Category> UpdateCategory(int id, Category category);
     }
 }

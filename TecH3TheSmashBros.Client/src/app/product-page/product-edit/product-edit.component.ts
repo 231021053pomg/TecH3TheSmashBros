@@ -15,6 +15,7 @@ export class ProductEditComponent implements OnInit {
   
   @Input() product : Product
   @Output() updateEvent = new EventEmitter<boolean>();
+  @Output() cancelEvent = new EventEmitter<boolean>();
 
   constructor(
     private productService : ProductService,
@@ -45,7 +46,6 @@ export class ProductEditComponent implements OnInit {
     this.productService.getCategories()
       .subscribe(category => {
         this.categories = category;
-        console.log(this.categories)
       }
     )
   }
@@ -60,5 +60,9 @@ export class ProductEditComponent implements OnInit {
     product.categoryId = parseInt(product.categoryId);
     console.log(product)
     this.updateEvent.emit(product);
+  }
+
+  cancel(): void {
+    this.cancelEvent.emit();
   }
 }
