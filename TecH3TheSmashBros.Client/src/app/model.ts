@@ -1,9 +1,9 @@
-export interface Category{
+export interface Category {
     id: number;
     title: string;
 }
 
-export interface Product{
+export interface Product {
     id: number,
     title: string,
     storage: number,
@@ -13,9 +13,23 @@ export interface Product{
     images: string
 }
 
-export interface CartItem{
-    productid : number,
+export interface CartItem {
+    productid: number,
     navn: string,
     pris: number,
     antal: number,
+    storage: number,
 }
+export interface Order {
+    date : Date,
+    id : number,
+    orderDetails: Array<OrderDetails>
+}
+export interface OrderDetails {
+    amount: number
+    id: number
+    orderId: number
+    price: number
+    productsId: number
+}
+
