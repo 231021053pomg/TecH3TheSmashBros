@@ -1,0 +1,13 @@
+<div class="d-flex">
+    <div class="products">
+        <div class="product" *ngFor="let product of products; let i = index" [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
+            <div *ngIf="i !== productEditIndex">
+                <p>{{product.category.title}}</p>
+                <p>{{product.title}}</p>
+                <p>Storage: {{product.storage}}</p>
+                <p>Price: {{product.price}}</p>
+                <a (click)="AddBasket(product)" class="buy">Buy</a>
+            </div>
+        </div>
+    </div>
+</div>

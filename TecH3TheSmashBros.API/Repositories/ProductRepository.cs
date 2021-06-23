@@ -84,12 +84,19 @@ namespace TecH3TheSmashBros.API.Repositories
 
         public async Task<Product> UpdateProduct(int id, Product product)
         {
+            Console.WriteLine("repo");
             var editProduct = await _sut.Product.FirstOrDefaultAsync(a => a.Id == id);
             if (editProduct != null)
             {
-                editProduct = product;
+                editProduct.Title = product.Title;
+                editProduct.Price = product.Price;
+                editProduct.Storage = product.Storage;
+                editProduct.CategoryId = product.CategoryId;
+                editProduct.Images = product.Images;
+
                 editProduct.UpdatedAt = DateTime.Now;
-                _sut.Product.Update(editProduct);
+
+                Console.WriteLine(editProduct.CategoryId);
                 await _sut.SaveChangesAsync();
             }
             return editProduct;

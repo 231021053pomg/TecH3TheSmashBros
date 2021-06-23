@@ -12,16 +12,28 @@ export class ProductService {
   apiUrl: string = "https://localhost:5001/api/";
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
   constructor(
-    private http:HttpClient
-  ){ }
+    private http: HttpClient
+  ) { }
 
-  getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiUrl+"products").pipe(
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl + "products").pipe(
       catchError(this.handleError<Product[]>("getProducts"))
+    )
+  }
+
+  getProductsByCategoryId(categoryId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}products/by_category/${categoryId}`).pipe(
+      catchError(this.handleError<Product[]>("getProductsByCategoryId"))
+    )
+  }
+
+  getProduct(id: number): Observable<Product>{
+    return this.http.get<Product>(`${this.apiUrl}products/${id}`).pipe(
+      catchError(this.handleError<Product>("getProductById"))
     )
   }
 
@@ -32,7 +44,7 @@ export class ProductService {
   }
 
   updateProduct(id: number, product: Product): Observable<Product>{
-    return this.http.patch<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
+    return this.http.put<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("updateProduct"))
     )
   }
@@ -43,9 +55,27 @@ export class ProductService {
     )
   }
 
-  getCategories(): Observable<Category[]>{
+  getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrl}categories`).pipe(
       catchError(this.handleError<Category[]>("getCategories"))
+    )
+  }
+
+  addCategory(categoryTitle: string): Observable<Category>{
+    return this.http.post<Category>(`${this.apiUrl}categories?categoryTitle=${categoryTitle}`, this.httpOptions).pipe(
+      catchError(this.handleError<Product>("addCategory"))
+    )
+  }
+
+  updateCategory(categoryId: number, category: Category): Observable<Category>{
+    return this.http.put<Category>(`${this.apiUrl}categories/${categoryId}`,category,this.httpOptions).pipe(
+      catchError(this.handleError<Product>("updateCategory"))
+    )
+  }
+
+  deleteCategory(categoryId: number): Observable<Category>{
+    return this.http.delete<Category>(`${this.apiUrl}categories/${categoryId}`).pipe(
+      catchError(this.handleError<Product>("deleteCategory"))
     )
   }
 
@@ -56,16 +86,16 @@ export class ProductService {
     * @param operation - name of the operation that failed
     * @param result - optional value to return as the observable result
     */
-   private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-       // TODO: send the error to remote logging infrastructure
-       console.error(error); // log to console instead
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-       // TODO: better job of transforming error for user consumption
-       console.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
 
-       // Let the app keep running by returning an empty result.
-       return of(result as T);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
     };
   }
 }

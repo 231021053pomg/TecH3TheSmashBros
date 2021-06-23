@@ -34,7 +34,7 @@ namespace TecH3TheSmashBros.API.Controllers
             }
         }
 
-        [HttpGet("products/{categoryId}")]
+        [HttpGet("products/by_category/{categoryId}")]
         public async Task<IActionResult> GetAllProductsByCategory([FromRoute] int categoryId)
         {
             try
@@ -73,13 +73,13 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
-        [HttpPatch("products/{productsId}")]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, Product product)
+        [HttpPut("products/{productsId}")]
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productsId, [FromBody] Product product)
         {
             try
             {
-                var removed_product = await _productService.UpdateProduct(productsId, product);
-                return Ok(removed_product);
+                var updated_product = await _productService.UpdateProduct(productsId, product);
+                return Ok(updated_product);
             }
             catch (Exception ex)
             {
@@ -145,6 +145,19 @@ namespace TecH3TheSmashBros.API.Controllers
             {
                 var removed_category = await _productService.DeleteCategory(categoryId);
                 return Ok(removed_category);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        [HttpPut("categories/{categoryId}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] int categoryId, [FromBody] Category category)
+        {
+            try
+            {
+                var updated_category = await _productService.UpdateCategory(categoryId, category);
+                return Ok(updated_category);
             }
             catch (Exception ex)
             {
