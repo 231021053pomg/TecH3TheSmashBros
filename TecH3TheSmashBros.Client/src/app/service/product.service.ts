@@ -25,6 +25,12 @@ export class ProductService {
     )
   }
 
+  getProductsByCategoryId(categoryId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}products/by_category/${categoryId}`).pipe(
+      catchError(this.handleError<Product[]>("getProductsByCategoryId"))
+    )
+  }
+
   getProduct(id: number): Observable<Product>{
     return this.http.get<Product>(`${this.apiUrl}products/${id}`).pipe(
       catchError(this.handleError<Product>("getProductById"))
@@ -44,7 +50,6 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product>{
-    console.log("create")
     return this.http.post<Product>(`${this.apiUrl}products`,product,this.httpOptions).pipe(
       catchError(this.handleError<Product>("addProduct"))
     )
@@ -59,6 +64,12 @@ export class ProductService {
   addCategory(categoryTitle: string): Observable<Category>{
     return this.http.post<Category>(`${this.apiUrl}categories?categoryTitle=${categoryTitle}`, this.httpOptions).pipe(
       catchError(this.handleError<Product>("addCategory"))
+    )
+  }
+
+  updateCategory(categoryId: number, category: Category): Observable<Category>{
+    return this.http.put<Category>(`${this.apiUrl}categories/${categoryId}`,category,this.httpOptions).pipe(
+      catchError(this.handleError<Product>("updateCategory"))
     )
   }
 

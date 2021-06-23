@@ -151,5 +151,18 @@ namespace TecH3TheSmashBros.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        [HttpPut("categories/{categoryId}")]
+        public async Task<IActionResult> UpdateCategory([FromRoute] int categoryId, [FromBody] Category category)
+        {
+            try
+            {
+                var updated_category = await _productService.UpdateCategory(categoryId, category);
+                return Ok(updated_category);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
     }
 }

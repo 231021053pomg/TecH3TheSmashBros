@@ -9,10 +9,12 @@ import { OrderComponent } from './order/order.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component:HomepageComponent},
-  { path: 'products/:id',component:ProductDetailComponent},
   { path: 'products',component:ProductPageComponent},
-  { path: 'CheckOut', component:CheckoutComponent},
   { path: 'Orders', component:OrderComponent},
+  { path: 'products/category',component:ProductPageComponent},
+  { path: 'products/category/:category_id',component:ProductPageComponent},
+  { path: 'products/:id',component:ProductDetailComponent},
+  { path: 'CheckOut', component:CheckoutComponent}
 ];
 
 @NgModule({
