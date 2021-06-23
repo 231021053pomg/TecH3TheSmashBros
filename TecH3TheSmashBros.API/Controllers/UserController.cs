@@ -65,9 +65,15 @@ namespace TecH3TheSmashBros.API.Controllers
         [HttpPut("user/{id}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User user)
         {
-            var updateUser = await _userService.UpdateUser(id, user);
-            return Ok(updateUser);
-
+            try
+            {
+                var updateUser = await _userService.UpdateUser(id, user);
+                return Ok(updateUser);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         [HttpDelete("user/{id}")]
@@ -77,6 +83,20 @@ namespace TecH3TheSmashBros.API.Controllers
             return Ok(deleteUser);
         }
         #endregion
+
+        [HttpPut("customer/{id}")]
+        public async Task<IActionResult> UpdateCustomer([FromRoute] int id, [FromBody] Customer customer)
+        {
+            try
+            {
+                var updatedCustomer = await _userService.UpdateCustomer(id, customer);
+                return Ok(updatedCustomer);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
 
         #region Roles
 

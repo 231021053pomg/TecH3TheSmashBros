@@ -40,7 +40,14 @@ namespace TecH3TheSmashBros.API.Services
 
             return editUpdate;
         }
-       
+
+        public async Task<Customer> UpdateCustomer(int id, Customer customer)
+        {
+            var editUpdate = await _customerRepository.UpdateCustomer(id, customer);
+
+            return editUpdate;
+        }
+
         public async Task<User> DeleteUser(int id)
         {
             var user = await _userRepository.DeleteUser(id);

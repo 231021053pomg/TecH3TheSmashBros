@@ -2,7 +2,7 @@
     <div>
         Email:
         <br>
-        <input class="loginInputBox" id="email" #email >
+        <input class="loginInputBox" id="email" #email>
     </div>
     <div>
         Password:
@@ -13,7 +13,7 @@
 
     <button (click)="createClick()">Create</button>
 
-    <div *ngIf="createClicked"class="createUserCustomer">
+    <div *ngIf="createClicked" class="createUserCustomer">
         Firstname:
         <br>
         <input class="customerInputBox" id="firstname" #firstname>
@@ -43,32 +43,29 @@
         city.value='';
         ">Create User</button>
     </div>
-</div>   
+</div>
 
 <div *ngFor="let user of users" class="userBox">
     <!-- <div *ngIf="user.roleid==1"> -->
-        <ul>
+    <ul>
 
-                <h2>{{ user.email }}</h2>
-                <input class="customerInputBox" value="{{user.customer[0].firstName}}" #firstname>
-                <input class="customerInputBox" value="{{user.customer[0].lastName}}" #lastname>
-                <input class="customerInputBox" value="{{user.customer[0].street}}" #street>
-                <input class="customerInputBox" value="{{user.customer[0].zipcode}}" #zipcode>
-                <input class="customerInputBox" value="{{user.customer[0].city}}" #city>
-                <button id="updateButton"(click)="updateUser(firstname.value, lastname.value, street.value, zipcode.value, city.value);
-                firstname.value='';
-                lastname.value='';
-                street.value='';
-                zipcode.value='';
-                city.value='';
-                ">Update</button>
-                <button id="xButton" (click)="deleteUser(user)">X</button>
+        <h2>{{ user.email }}</h2>
+        <input class="customerInputBox" value="{{user.email}}" #email>
+        <input class="customerInputBox" value="{{user.password}}" #password>
+        <button id="updateButton" (click)="updateUser(user, email.value, password.value)">Update</button>
+        <br>
+        <input class="customerInputBox" value="{{user.customer[0].firstName}}" #firstname>
+        <input class="customerInputBox" value="{{user.customer[0].lastName}}" #lastname>
+        <input class="customerInputBox" value="{{user.customer[0].street}}" #street>
+        <input class="customerInputBox" value="{{user.customer[0].zipcode}}" #zipcode>
+        <input class="customerInputBox" value="{{user.customer[0].city}}" #city>
+        <button id="updateButton" (click)="updateCustomer(user, firstname.value, lastname.value, street.value, zipcode.value, city.value)">Update</button>
+        <button id="xButton" (click)="deleteUser(user)">X</button>
 
-        </ul>
-        
-        
+    </ul>
+
+
     <!-- </div> -->
 
-   
-</div>
 
+</div>

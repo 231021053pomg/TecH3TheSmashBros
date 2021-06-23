@@ -48,6 +48,12 @@ export class LoginService {
     )
   }
 
+  updateCustomer(id: number, customer: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${this.apiUrl}customer/${id}`, customer, this.httpOptions).pipe(
+      catchError(this.handleError<Customer>("updateCustomer"))
+    )
+  }
+
   addUser(user: User): Observable<User> {
     console.log(user);
     return this.http.post<User>(`${this.apiUrl}user/`, user, this.httpOptions).pipe(

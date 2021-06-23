@@ -58,21 +58,34 @@ export class LoginComponent implements OnInit {
       this.loginService.deleteUser(user.id).subscribe();
     }
   }
-  updateUser(id: number, email: string, password: string, firstname: string, lastname: string, street: string, zipcode: string, city: string): void {
-    let user: User = {
+  updateUser(user: User, email:string, password:string):void{
+    let updateUser: User = {
+      id:0,
       email: email,
       password: password,
-      customer: [{
+      customer: []
+    }
+      this.loginService.updateUser(user.id,updateUser)
+      .subscribe(a => {
+        console.log(a)
+      })
+  }
+
+  updateCustomer(user: User, firstname: string, lastname: string, street: string, zipcode: string, city: string): void {
+    let updatedCustomer: Customer = {
         firstname: firstname,
         lastname: lastname,
         street: street,
         zipcode: zipcode,
         city: city
-      }]
     }
-    this.loginService.updateUser(id,user)
-      .subscribe(a => {this.users.push(user)})
+    this.loginService.updateCustomer(user.id,updatedCustomer)
+      .subscribe(a => {
+        console.log(a)
+      })
   }
+  
+
   getUser(id: number) {
     this.loginService.getUser(id)
       .subscribe(user => { this.users.push(user) });
