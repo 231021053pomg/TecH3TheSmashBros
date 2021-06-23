@@ -26,7 +26,8 @@ export class BasketService {
   }
 
   createbasket(): void {
-    if (localStorage.getItem('cart') == null) {
+    let cart = localStorage.getItem('cart')
+    if (cart == null || cart == 'null')  {
       this.Cart = [];
       console.log("LOCALSTORAGE NULL", JSON.parse(localStorage.getItem('cart')));
       localStorage.setItem('cart', JSON.stringify(this.Cart));
@@ -62,8 +63,8 @@ export class BasketService {
   SaveBasket(): void {
     localStorage.setItem('cart', JSON.stringify(this.Cart));
   }
-  getBasket(): CartItem[] {
-    return this.Cart;
+  getBasket(): Observable<CartItem[]> {
+    return of(this.Cart);
   }
   editbasket(id: number, antal: number): void {
     this.createbasket();
@@ -87,7 +88,27 @@ export class BasketService {
     console.log("Efter den har slettede",this.Cart);
     
     this.SaveBasket();
-
+  }
+  buyeverthing(): Observable<CartItem[]> {
+    let order = {
+      "userId": 1,
+      "date": "2021-06-22T11:44:22.869Z",
+      orderDetails: []
+    } 
+    this.createbasket();
+    this.Cart.forEach(function(item){
+      order.orderDetails.push({
+        "productsId": item.productid,
+        "price": item.pris,
+        "amount": item.antal
+      })
+    });
+    console.log("buyeverything");
+    return this.http.post<CartItem[]>(`${this.apiUrl}Order`, order, this.httpOptions).pipe(
+      tap(_ => {localStorage.setItem('cart',null)}),
+      catchError(this.handleError<CartItem[]>("addOrder"))
+    );
+        
   }
   // editBasket() : CartItem[]{
 

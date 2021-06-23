@@ -1,15 +1,20 @@
 <!-- <img class ="clogo" src="assets/img/Logo.jpg"> -->
 <div style="background-image:url('assets/img/Logo.jpg'); width:100%; height:270px; background-position:center;"><button
-        class="Login">Login</button>&nbsp;</div>
+    class="Login">Login</button>&nbsp;</div>
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <div class="start">
-    <h2> Welcome to SmashBros buying site </h2>
-    <p>Buy SmashBros character</p>
+<h2> Welcome to SmashBros buying site </h2>
+<p>Buy SmashBros character</p>
 </div>
 <menu class="Menu">
+<h2> <a routerLink="/home">Home </a> |<a routerLink="/product">Product </a> | <a routerLink="/CheckOut">CheckOut </a></h2>
     <h2> Home | <a routerLink="/products">Product</a> | <a routerLink="/CheckOut">CheckOut </a></h2>
 </menu>
+
 <router-outlet></router-outlet>
+<router-outlet></router-outlet>
+<router-outlet></router-outlet>
+<!-- <app-product-page></app-product-page> -->

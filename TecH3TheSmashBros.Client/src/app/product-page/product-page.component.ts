@@ -3,8 +3,6 @@ import { CartItem, Category, Product } from '../model';
 import { BasketService } from '../service/basket.service';
 import { ProductService } from '../service/product.service';
 
-
-
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
