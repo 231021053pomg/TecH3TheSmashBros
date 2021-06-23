@@ -25,7 +25,6 @@ export class ProductService {
     )
   }
 
-  deleteProduct(id: number): Observable<Product> {
   getProduct(id: number): Observable<Product>{
     return this.http.get<Product>(`${this.apiUrl}products/${id}`).pipe(
       catchError(this.handleError<Product>("getProductById"))
@@ -38,20 +37,11 @@ export class ProductService {
     )
   }
 
-  updateProduct(id: number, product: Product): Observable<Product> {
-    return this.http.patch<Product>(`${this.apiUrl}products/${id}`, product, this.httpOptions).pipe(
-
   updateProduct(id: number, product: Product): Observable<Product>{
-    console.log("update")
     return this.http.put<Product>(`${this.apiUrl}products/${id}`,product,this.httpOptions).pipe(
-
       catchError(this.handleError<Product>("updateProduct"))
     )
   }
-
-
-  addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}products`, product, this.httpOptions).pipe(
 
   addProduct(product: Product): Observable<Product>{
     console.log("create")
