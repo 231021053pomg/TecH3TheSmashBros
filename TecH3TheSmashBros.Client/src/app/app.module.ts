@@ -9,8 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductEditComponent } from './product-page/product-edit/product-edit.component';
+import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-page/product-detail/product-detail.component';
 import { OrderComponent } from './order/order.component';
+
 
 
 @NgModule({
@@ -19,9 +21,9 @@ import { OrderComponent } from './order/order.component';
     HomepageComponent,
     ProductPageComponent,
     ProductEditComponent,
+    LoginComponent,
     ProductDetailComponent,
     CheckoutComponent,
-    ProductEditComponent,
     OrderComponent
   ],
   imports: [
