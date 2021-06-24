@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { CartItem, Category, Product } from '../model';
 import { BasketService } from '../service/basket.service';
 import { ProductService } from '../service/product.service';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-product-page',
@@ -17,6 +20,8 @@ export class ProductPageComponent implements OnInit {
 
 
   constructor(
+    private route: ActivatedRoute,
+    private location: Location,
     private productService: ProductService,
     private basketService : BasketService
   ) {}
@@ -27,8 +32,15 @@ export class ProductPageComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.productService.getProducts()
-      .subscribe(product => this.products = product)
+    //checks if it should sort by categoryId
+    if( this.location.path().includes ("products/category/") ){
+      var categoryId = (this.route.snapshot.paramMap.get('category_id') || 0) as number;
+      this.productService.getProductsByCategoryId(categoryId)
+        .subscribe(product => this.products = product)
+    } else { //else it just gets everything
+      this.productService.getProducts()
+        .subscribe(product => this.products = product)
+    }
   }
 
   getCategories(): void {
@@ -42,8 +54,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.addProductEnabled = false;
-
     var product: Product = {
       id: 0,
       title: "",
@@ -57,27 +67,47 @@ export class ProductPageComponent implements OnInit {
       images: ""
     };
     this.products.push(product);
-    this.productEditIndex = this.products.length - 1;
+    this.openEditProduct(this.products.length - 1);
   }
 
-  openEditProduct(index: number) {
+  openEditProduct(index: number) { //Hides the big + button, and sets the current editing target
     this.productEditIndex = index;
     this.addProductEnabled = false;
+  }
+
+  closeEditProduct(){ //Unhides the big + button, and resets the editing target
+    this.productEditIndex = -1;
+    this.addProductEnabled = true;
   }
 
   editProduct(product: Product, index: number): void {
     var last_index = this.products.length - 1;
 
-    if (this.products[index].id == 0) { //adds new product
+    //adds new product
+    if (this.products[index].id == 0) { 
       this.productService.addProduct(product)
-        .subscribe(a => this.products[last_index] = a)
+        .subscribe(product => {
+          this.products[last_index] = product;
+          this.closeEditProduct();
+        }
+      )
     }
-    else { //edits existing product
+    //edits existing product
+    else {
       this.productService.updateProduct(this.products[this.productEditIndex].id, product)
-        .subscribe(a => this.products[this.productEditIndex] = a)
+        .subscribe(product =>{ //after Api call, the product is updated on the frontend without reloading
+          var updated_product = this.products[this.productEditIndex];
+
+          updated_product.title = product.title;
+          updated_product.categoryId = product.categoryId;
+          updated_product.price = product.price;
+          updated_product.storage = product.storage;
+          updated_product.images = product.images;
+
+          this.closeEditProduct();
+        }
+      )
     }
-    this.productEditIndex = -1;
-    this.addProductEnabled = true;
   }
 
   addCategory(title: string) {
@@ -86,6 +116,18 @@ export class ProductPageComponent implements OnInit {
 
     var input = document.getElementById("category-input") as HTMLInputElement;
     input.value = "";
+    this.getCategories();
+  }
+
+  editCategory(category: Category,new_title: string){
+    this.categoryEditIndex = -1;
+    category.title = new_title;
+    this.productService.updateCategory(category.id,category).subscribe(
+      category => {
+        this.getProducts();
+        this.getCategories();
+      }
+    )
   }
 
   deleteCategory(category: Category) {
@@ -101,8 +143,8 @@ export class ProductPageComponent implements OnInit {
     if (found){
       alert(`can't delete ${category.title} while it's referenced by products`)
     } else {
-      this.productService.deleteCategory(id);
-      this.categories = this.categories.filter(a => a != category);
+      this.productService.deleteCategory(id).subscribe(() => this.getCategories());
+      //this.categories = this.categories.filter(a => a != category);
     }
   }
 
@@ -110,9 +152,6 @@ export class ProductPageComponent implements OnInit {
     this.categoryEditIndex = category.id;
   }
 
-  editCategory(category: Category){
-    this.categoryEditIndex = -1;
-  }
   
   // buyProduct(product): void{
   //   var cart = []
