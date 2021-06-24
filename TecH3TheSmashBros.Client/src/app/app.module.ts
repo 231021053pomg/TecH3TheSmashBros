@@ -22,8 +22,9 @@ import { OrderComponent } from './order/order.component';
     ProductPageComponent,
     ProductEditComponent,
     LoginComponent,
-    ProductDetailComponent,
     CheckoutComponent,
+    ProductEditComponent,
+    ProductDetailComponent,
     OrderComponent
   ],
   imports: [
