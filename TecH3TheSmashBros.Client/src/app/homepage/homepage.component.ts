@@ -27,7 +27,6 @@ export class HomepageComponent implements OnInit {
     .subscribe(products => {
       this.products = products.sort(() => Math.random() - Math.random()).slice(0,3);
     });
-    console.log(this.products); 
    }
 AddBasket(product : Product):void{
   console.log(product.id,product.title,product.price,1);

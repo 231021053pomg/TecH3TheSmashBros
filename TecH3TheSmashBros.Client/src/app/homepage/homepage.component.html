@@ -1,4 +1,4 @@
-<div class="d-flex">
+<!-- <div class="d-flex">
     <div class="products">
         <div class="product" *ngFor="let product of products; let i = index" [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
             <div *ngIf="i !== productEditIndex">
@@ -10,4 +10,17 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<div class="products">
+    <div class="product rounded-3 shadow-sm m-2" *ngFor="let product of products; let i = index">
+        <app-product-edit *ngIf="i == productEditIndex" [product]="product" (updateEvent)="editProduct($event, i)"
+            (cancelEvent)=closeEditProduct()></app-product-edit>
+        <div *ngIf="i !== productEditIndex">
+            <p>{{product.category.title}}</p>
+            <p>{{product.title}}</p>
+            <p>Storage: {{product.storage}}</p>
+            <p>Price: {{product.price}}</p>
+            <button class="btn btn-primary me-1" (click)="AddBasket(product)">Buy</button>
+        </div>
+        <img src="/assets/img/{{product.images}}">
+    </div>
