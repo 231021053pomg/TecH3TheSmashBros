@@ -1,5 +1,5 @@
 .categories {
-    width: 50em;
+    min-width: 20em;
     background-color: #111;
 }
 

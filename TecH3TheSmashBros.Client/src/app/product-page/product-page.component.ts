@@ -18,6 +18,8 @@ export class ProductPageComponent implements OnInit {
   productEditIndex: number = -1;
   categoryEditIndex: number = -1;
 
+  isAdmin: boolean = true;
+
 
   constructor(
     private route: ActivatedRoute,
