@@ -18,16 +18,30 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.CartItems = JSON.parse(localStorage.getItem('cart'));
+    this.basketService.getBasket().subscribe(CartItems => this.CartItems = CartItems)
     console.log("Checkout", this.CartItems);
   }
   editbasket(id: number, antal: number): void {
     this.basketService.editbasket(id, antal);
-    this.CartItems = JSON.parse(localStorage.getItem('cart'));
+    this.basketService.getBasket().subscribe(CartItems => this.CartItems = CartItems)
   }
   deleteBasket(id: number): void {
-    console.log("DeleteBasket",id);
+    console.log("DeleteBasket", id);
     this.basketService.removefrombasket(id);
-    this.CartItems = JSON.parse(localStorage.getItem('cart'));
+    this.basketService.getBasket().subscribe(CartItems => this.CartItems = CartItems)
   }
+  addtoOrder(): void {
+    if (this.CartItems.length != 0) {
+      console.log("Add order")
+      this.basketService.buyeverthing()
+        .subscribe(a => console.log(a));
+      this.basketService.getBasket().subscribe(CartItems => this.CartItems = CartItems)
+    }
+    else {
+      alert("Kurven er tom");
+      console.log("Kurven er tom")
+    }
+
+  }
+  
 }

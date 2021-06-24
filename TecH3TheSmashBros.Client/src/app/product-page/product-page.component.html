@@ -1,22 +1,47 @@
 <div class="d-flex">
     <div class="categories">
-        <a>All products</a>
-        <a *ngFor="let category of categories">{{category.title}}</a>
+        <div>
+            <a href="products" (click)="getProducts()">All products</a>
+        </div>
+        <div *ngFor="let category of categories">
+            <div *ngIf="category.id == categoryEditIndex" class="input-group mb-3 mx-2 w-auto">
+                <input type="text" #CategoryEditId class="form-control" value="{{category.title}}"
+                    aria-label="Recipient's username">
+                <div class="input-group-append">
+                    <button (click)="editCategory(category, CategoryEditId.value)" class="btn btn-outline-secondary"
+                        type="button">Save</button>
+                </div>
+            </div>
+            <div *ngIf="category.id != categoryEditIndex">
+                <a href="products/category/{{category.id}}" (click)="getProducts()">{{category.title}}</a>
+                <a class="float-end me-1" (click)="deleteCategory(category)">x</a>
+                <a class="float-end me-1" (click)="openEditCategory(category)">e</a>
+            </div>
+        </div>
+        <div>
+            <input class="form-control mx-2 w-auto" id="category-input" #categoryPrice>
+            <button class="mt-2 ms-2 btn btn-primary" (click)="addCategory(categoryPrice.value)">Add Category</button>
+        </div>
+
     </div>
     <div class="products">
-        <div class="product" *ngFor="let product of products; let i = index" [ngStyle]="{'background-image': 'url(./assets/img/' + product.images + ')'}">
-            <app-product-edit *ngIf="i == productEditIndex" (updateEvent)="editProduct($event, i)"></app-product-edit>
+        <div class="product rounded-3 shadow-sm m-2" *ngFor="let product of products; let i = index">
+            <app-product-edit *ngIf="i == productEditIndex" [product]="product" (updateEvent)="editProduct($event, i)"
+                (cancelEvent)=closeEditProduct()></app-product-edit>
             <div *ngIf="i !== productEditIndex">
                 <p>{{product.category.title}}</p>
                 <p>{{product.title}}</p>
                 <p>Storage: {{product.storage}}</p>
                 <p>Price: {{product.price}}</p>
-                <a (click)="openEditProduct(i)" class="edit">Edit</a>
-                <a (click)="deleteProduct(product)" class="delete">x</a>
-                <a (click)="AddBasket(product)" class="buy">Buy</a>
+                <button class="btn btn-primary me-1" (click)="AddBasket(product)">Buy</button>
+                <button class="btn btn-info me-1" routerLink="{{product.id}}">Details</button>
+                <button class="btn btn-warning " (click)="openEditProduct(i)">Edit</button>
+                <button class="btn btn-danger btn-sm position-absolute delete"
+                    (click)="deleteProduct(product)">x</button>
             </div>
+            <img src="/assets/img/{{product.images}}">
         </div>
-        <div *ngIf="addProductEnabled === true" class="product add-product">
+        <div *ngIf="addProductEnabled === true" class="add-product product rounded-3 shadow-sm bg-body m-2 bg-body">
             <a (click)="addProduct()">+</a>
         </div>
     </div>
