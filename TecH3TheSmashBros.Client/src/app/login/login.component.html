@@ -35,7 +35,8 @@
         <input class="customerInputBox" id="city" #city>
         <br>
         <button (click)="
-        addUser(email.value, lastname.value, firstname.value, lastname.value, street.value, zipcode.value, city.value);
+        addUser(email.value, password.value, lastname.value, firstname.value, lastname.value, street.value, zipcode.value, city.value);
+        password.value='';
         firstname.value='';
         lastname.value='';
         street.value='';
