@@ -13,8 +13,6 @@ import { ProductService } from '../service/product.service';
 export class HomepageComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
-  addProductEnabled: boolean = true;
-  productEditIndex: number = -1;
   constructor(
     private productService : ProductService,
     private formBuilder: FormBuilder,
